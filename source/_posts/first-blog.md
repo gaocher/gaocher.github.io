@@ -19,7 +19,7 @@ categories:
 如何申请友盟，请参考https://www.jianshu.com/p/3025b0e221bf
 
 ## 问题解决
-1. 当博客域名是子url时，例如https://xxx.github.io/blog，则修改站点配置文件如下：
+1. 当博客域名是子URL时，例如https://xxx.github.io/blog，则修改站点配置文件如下：
 ```yaml
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
