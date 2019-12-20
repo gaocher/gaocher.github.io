@@ -17,6 +17,19 @@ categories:
 1. 站长工具 cnzz
 目前v7.6.0版本安装cnzz特别简单，只需要将创建的cnzz的id写入_config.yml里cnzz_siteid即可，无需添加其他任何文件。
 如何申请友盟，请参考https://www.jianshu.com/p/3025b0e221bf
+2. 添加mermaid画图
+  - npm install hexo-filter-mermaid-diagrams --save
+  - 修改themes/next下的_config.yml:
+```
+# Mermaid tag
+mermaid:
+  enable: false
+  # Available themes: default | dark | forest | neutral
+  theme: forest
+  cdn: //cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js
+  #cdn: //cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js
+```
+具体请参考 https://rogersnowing.cn/post/38b5106c.html
 
 ## 问题解决
 1. 当博客域名是子URL时，例如https://xxx.github.io/blog，则修改站点配置文件如下：
