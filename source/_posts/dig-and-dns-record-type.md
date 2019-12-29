@@ -6,7 +6,7 @@ categories:
     - 网络
     - DNS
 ---
-本文介绍dig的常规使用，以及以`iqiyi.com`域名为例的dns记录类型举例。之所以用`iqiyi.com`为例，是因为本人在此公司任职:)。
+本文介绍dig的常规使用，以及以`iqiyi.com`域名为例的dns记录类型举例。之所以用`iqiyi.com`为例，是因为本人在此公司任职:)。DNS记录类型介绍可以查看{% post_link dns-data-type-md DNS记录类型%}。
 # dig命令
 ```
 dig [type] [@resolver-server] [+short] [+trace] target
