@@ -3,7 +3,7 @@ title: Nio系列之Java Nio
 date: 2019-12-20 11:33:32
 tags:
 categories: 
-    - 网络IO
+    - 网络
     - Nio
 ---
 # 基础概念介绍
@@ -164,7 +164,7 @@ public class EchoServer {
 - SelectionKey：用于表示一个Selector与Channel，重点是**attach的对象，可以方便的用于与Channel相关的Context存储**。
 
 具体关系如下：
-![Java Nio关系图](https://note.youdao.com/yws/public/resource/718229537c7ebafa641dce612546e419/xmlnote/943FB2EA57474B33BA73F5308574F10D/8433)
+![Java Nio关系图](/images/java_nio_relation.png)
 
 一个channel为什么会有多个key？一个channel可被多个selector注册监听，所以需要用数组来保存keys。
 
