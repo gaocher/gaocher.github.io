@@ -12,6 +12,7 @@ categories:
 2. Hexo发布到GitHub https://hexo.io/docs/github-pages
 3. Next主题安装 https://github.com/theme-next/hexo-theme-next
 4. Next主题使用教程 http://theme-next.iissnan.com/
+5. 添加sitemap供搜索引擎搜索 https://eericzeng.github.io/2019/07/14/hexo%E5%8D%9A%E5%AE%A2%E7%AB%99%E7%82%B9sitemap%E7%9A%84%E4%BD%BF%E7%94%A8/
 
 ## 添加插件
 1. 站长工具 cnzz
