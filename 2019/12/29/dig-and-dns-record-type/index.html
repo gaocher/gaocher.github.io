@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://gaocher.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="本文介绍dig的常规使用，以及以iqiyi.com域名为例的dns记录类型举例。之所以用iqiyi.com为例，是因为本人在此公司任职:)。DNS记录类型介绍可以查看DNS记录类型。 dig命令1dig [type] [@resolver-server] [+short] [+trace] target  type指定记录类型如A、NS、MX等，具体可参考我之前的文章。默认查询为A记录。 @res">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dig与记录类型举例">
+<meta property="og:url" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2019&#x2F;12&#x2F;29&#x2F;dig-and-dns-record-type&#x2F;index.html">
+<meta property="og:site_name" content="Isaac&#39;s博客">
+<meta property="og:description" content="本文介绍dig的常规使用，以及以iqiyi.com域名为例的dns记录类型举例。之所以用iqiyi.com为例，是因为本人在此公司任职:)。DNS记录类型介绍可以查看DNS记录类型。 dig命令1dig [type] [@resolver-server] [+short] [+trace] target  type指定记录类型如A、NS、MX等，具体可参考我之前的文章。默认查询为A记录。 @res">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2019&#x2F;12&#x2F;29&#x2F;dig-and-dns-record-type&#x2F;DNS_Query_Flow.png">
+<meta property="article:published_time" content="2019-12-29T15:09:02.000Z">
+<meta property="article:modified_time" content="2019-12-29T16:13:16.549Z">
+<meta property="article:author" content="Isaac Gao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2019&#x2F;12&#x2F;29&#x2F;dig-and-dns-record-type&#x2F;DNS_Query_Flow.png">
+
+<link rel="canonical" href="https://gaocher.github.io/2019/12/29/dig-and-dns-record-type/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>dig与记录类型举例 | Isaac's博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Isaac's博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Isaac's博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2019/12/29/dig-and-dns-record-type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          dig与记录类型举例
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-29 23:09:02" itemprop="dateCreated datePublished" datetime="2019-12-29T23:09:02+08:00">2019-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-30 00:13:16" itemprop="dateModified" datetime="2019-12-30T00:13:16+08:00">2019-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/DNS/" itemprop="url" rel="index">
+                    <span itemprop="name">DNS</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文介绍dig的常规使用，以及以<code>iqiyi.com</code>域名为例的dns记录类型举例。之所以用<code>iqiyi.com</code>为例，是因为本人在此公司任职:)。DNS记录类型介绍可以查看<a href="/2019/12/29/dns-data-type-md/" title="DNS记录类型">DNS记录类型</a>。</p>
+<h1 id="dig命令"><a href="#dig命令" class="headerlink" title="dig命令"></a>dig命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig [type] [@resolver-server] [+short] [+trace] target</span><br></pre></td></tr></table></figure>
+<ul>
+<li>type指定记录类型如A、NS、MX等，具体可参考我之前的文章。默认查询为A记录。</li>
+<li>@resolver-server指定域名解析的本地服务器，默认是网关，但也可以手动指定，如8.8.8.8google的通用域名解析器。</li>
+<li>+short 简化应答形式，只显示ip结果</li>
+<li>+trace 显示整个域名解析的迭代过程，从根域名到顶级域名到次级域名直到主机域名。</li>
+</ul>
+<h1 id="dig举例"><a href="#dig举例" class="headerlink" title="dig举例"></a>dig举例</h1><h2 id="dig查询"><a href="#dig查询" class="headerlink" title="dig查询"></a>dig查询</h2><p>执行命令：<code>dig iqiyi.com</code>，得到结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一段</span><br><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com </span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 6831</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第二段</span><br><span class="line">;; QUESTION SECTION:  </span><br><span class="line">;iqiyi.com.			IN	A</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第三段</span><br><span class="line">;; ANSWER SECTION:    </span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.172</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.170</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.174</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.176</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.178</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第四段</span><br><span class="line">;; Query time: 7 msec  </span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 17:45:11 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 107</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结果说明<ul>
+<li>第一段 是查询命令说明以及结果统计信息展示</li>
+<li>第二段 查询内容</li>
+<li>第三段 查询结果内容，iqiyi.com的A记录有4个，350TTL（表明缓存时间是350s）。</li>
+<li>第四段 DNS服务器信息，192.168.3.1#53是本地DNS服务器192.168.3.1（家里的网关ip），53是端口号，DNS服务的默认端口。107是收到结果的大小107个字节。</li>
+</ul>
+</li>
+</ul>
+<h2 id="dig-short-简单查询"><a href="#dig-short-简单查询" class="headerlink" title="dig +short 简单查询"></a>dig +short 简单查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">101.227.188.170</span><br><span class="line">101.227.188.174</span><br><span class="line">101.227.188.172</span><br><span class="line">101.227.188.176</span><br><span class="line">101.227.188.178</span><br></pre></td></tr></table></figure>
+<p>只返回查询结果的ip地址。</p>
+<h2 id="dig分级查询"><a href="#dig分级查询" class="headerlink" title="dig分级查询"></a>dig分级查询</h2><p>执行命令:<code>dig iqiyi.com +trace</code>,得到结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com +trace</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Received 28 bytes from 192.168.3.1#53(192.168.3.1) in 3 ms</span><br></pre></td></tr></table></figure>
+<p>发现什么都没有返回，应该是本地服务器192.168.3.1网关不支持trace的查询。</p>
+<p>所以改用8.8.8.8服务器来查询，命令：<code>dig iqiyi.com +trace @8.8.8.8</code>,结果如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com +trace @8.8.8.8</span><br><span class="line">;; global options: +cmd</span><br><span class="line">&#x2F;&#x2F;首次查询 根域名服务器查询 （查询本地服务器）</span><br><span class="line">.			51069	IN	NS	f.root-servers.net.</span><br><span class="line">.			51069	IN	NS	h.root-servers.net.</span><br><span class="line">.			51069	IN	NS	e.root-servers.net.</span><br><span class="line">.			51069	IN	NS	l.root-servers.net.</span><br><span class="line">.			51069	IN	NS	c.root-servers.net.</span><br><span class="line">.			51069	IN	NS	b.root-servers.net.</span><br><span class="line">.			51069	IN	NS	m.root-servers.net.</span><br><span class="line">.			51069	IN	NS	a.root-servers.net.</span><br><span class="line">.			51069	IN	NS	d.root-servers.net.</span><br><span class="line">.			51069	IN	NS	i.root-servers.net.</span><br><span class="line">.			51069	IN	NS	k.root-servers.net.</span><br><span class="line">.			51069	IN	NS	j.root-servers.net.</span><br><span class="line">.			51069	IN	NS	g.root-servers.net.</span><br><span class="line">.			51069	IN	RRSIG	NS 8 0 518400 20200110170000 20191228160000 22545 . O+lE7aOii9IvLdYuWpMrTY0RkPpbc0yJLAhg&#x2F;pwdxh8qZiACwS4TxuYo vxZrvoB0sJ7RyDgycViUEt++avEWx1JjzluiOXj1R0jqZQ7EXO+L+acP o88jV9F3Hqeuudj4u3ZZvM55eLnWfJaJzap&#x2F;H3xi87rt5obw3zMd5QZE M2zQXSnrCiI2rSelaTeeHx6Mu+8yVigaAwRAH&#x2F;8QdiAs2y2VuLbdl+C7 mHrbc3blraXSC6dzlGAEmryReOS5WOaMkSJZBctFbnX8KMmSdd83zBOv CVtdkPKGCwtUTWbbNZqrndYGqfCHf8NVLugz5R+jY3uzMvaQvdXBKwFT dcImog&#x3D;&#x3D;</span><br><span class="line">;; Received 525 bytes from 8.8.8.8#53(8.8.8.8) in 41 ms</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第一次迭代 顶级域名（TLD）查询 (查询根域名服务器)</span><br><span class="line">com.			172800	IN	NS	l.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	b.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	c.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	d.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	e.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	f.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	g.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	a.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	h.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	i.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	j.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	k.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	m.gtld-servers.net.</span><br><span class="line">com.			86400	IN	DS	30909 8 2 E2D3C916F6DEEAC73294E8268FB5885044A833FC5459588F4A9184CF C41A5766</span><br><span class="line">com.			86400	IN	RRSIG	DS 8 1 86400 20200111050000 20191229040000 22545 . YT51a7sayHoEdZByf40buEQfUYzapxyvAwfPV12AwfWRh4crg9jIVcY6 V79GO4Yb+ezclS4ZTvT+WZ9yLdwuWnzAGVTD0fd9RLvK03nk45ZK42LP MNSHwwUOjv338vqcubwqNOyjxpEukQF3TPXgKAV&#x2F;ltpGzQYmnDofCd+S uLAssjpag59wPWruFItrIvE6qD7xaDXv+oVsO&#x2F;bTp7pVb7NOi+KOCpMI D8aP4xm+624JWxLZ59YXOLOy3q1YVfLiVCe4ghtJS4&#x2F;6BIuRhQ3CAOmj w4QfJVrTDnyn&#x2F;RY3z41BnRT8K6CkUyuDc5Nc4NlU5KX3HxdiphW1w6JM oWNrPQ&#x3D;&#x3D;</span><br><span class="line">;; Received 1169 bytes from 192.203.230.10#53(e.root-servers.net) in 170 ms</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第二次迭代 次级域名查询（查询TLD）</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns1.iqiyi.com.</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns2.iqiyi.com.</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns3.iqiyi.com.</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns4.iqiyi.com.</span><br><span class="line">CK0POJMG874LJREF7EFN8430QVIT8BSM.com. 86400 IN NSEC3 1 1 0 - CK0Q1GIN43N1ARRC9OSM6QPQR81H5M9A  NS SOA RRSIG DNSKEY NSEC3PARAM</span><br><span class="line">CK0POJMG874LJREF7EFN8430QVIT8BSM.com. 86400 IN RRSIG NSEC3 8 2 86400 20200102054825 20191226043825 12163 com. J8V3FpilA7JdIt7GBym3CCORYjgGlHAazZlLNBiJ0bFa92n4PrX0hPYo oUHtAA4lEaw9eSJjOIVXhnKq9AR7EgQFfMxcT8OvbBVJ4eErF1vBjd1B x4EkZM2IHIVPPv8XlziufAhiSVMnYHcZnuO8BpDaXrasvlW3U9vv&#x2F;VQU dCs79XwjQR&#x2F;XkFvJKvldj2EZd3FXLlRDdnwESxhlpLZmIg&#x3D;&#x3D;</span><br><span class="line">CDJHMJ049AHN95A56GE5FPTIT6CK3TVA.com. 86400 IN NSEC3 1 1 0 - CDJIFERNDE19197KLS7DLE5N5008MQB2  NS DS RRSIG</span><br><span class="line">CDJHMJ049AHN95A56GE5FPTIT6CK3TVA.com. 86400 IN RRSIG NSEC3 8 2 86400 20200103053214 20191227042214 12163 com. LQOPbhYOUqtzkl49A0Sg7IVpJ8HVep5FwE5ILJ0cK&#x2F;5uGsvKk1bbrM4A s0M5iiaVnQ0BwTt9FRNdYRGUVUL6YSJATaouDomYj3o&#x2F;h+0kGxvrJxnF jRuDsQS56c6LDALzd+2Hv4xwiOURhv0Nl4v3rycokglC6IjN1VpGrgWN bldR9ixluPAQsBo+m3TdieQyb4zc10Ks3BAJg4UKmNQSLg&#x3D;&#x3D;</span><br><span class="line">;; Received 723 bytes from 192.26.92.30#53(c.gtld-servers.net) in 171 ms</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第三次迭代  主机域名查询 （查询权威域名服务器）</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.172</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.174</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.176</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.178</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.170</span><br><span class="line">;; Received 118 bytes from 43.225.84.1#53(ns3.iqiyi.com) in 28 ms</span><br></pre></td></tr></table></figure>
+<p>根据每次迭代返回结果的服务器信息，我们可以发现DNS查询整体流程是这样的：</p>
+<img src="/2019/12/29/dig-and-dns-record-type/DNS_Query_Flow.png" class="" title="This is an image">
+
+<ul>
+<li>首次查询 从本地服务器（local dns server）获取根域名服务器地址，然后由<strong>本地服务器</strong>开始迭代dns查询过程。</li>
+<li>第一次迭代 由本地服务器访问根域名服务器，根域名服务器返回关于顶级域名<code>.com</code>的NS记录。</li>
+<li>第二次迭代 由本地服务器访问上一步获得的<code>.com</code>地址的顶级域名服务器，并从中获得关于<code>iqiyi.com</code>的NS记录。</li>
+<li>第三次迭代 由本地服务器访问由上一步获得的<code>iqiyi.com</code>NS的服务器地址，即<code>iqiyi.com</code>的权威服务器，然后获得iqiyi.com的A记录。</li>
+<li>最终，本地服务器返回关于<code>iqiyi.com</code>的IP地址给客户端，然后客户端再访问目标服务器。</li>
+</ul>
+<h1 id="记录类型举例"><a href="#记录类型举例" class="headerlink" title="记录类型举例"></a>记录类型举例</h1><ol>
+<li>SOA记录 <code>dig iqiyi.com soa</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com soa</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 20850</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="line"></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: 0, flags:; udp: 4096</span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	SOA</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		86400	IN	SOA	ns1.iqiyi.com. dnsadmin.iqiyi.com. 2019122905 1800 600 1209600 600</span><br><span class="line"></span><br><span class="line">;; Query time: 33 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:46:03 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 87</span><br></pre></td></tr></table></figure></li>
+<li>NS记录 <code>dig iqiyi.com ns</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com ns</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 21342</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="line"></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: 0, flags:; udp: 4096</span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	NS</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns2.iqiyi.com.</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns3.iqiyi.com.</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns4.iqiyi.com.</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns1.iqiyi.com.</span><br><span class="line"></span><br><span class="line">;; Query time: 11 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:47:10 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 110</span><br></pre></td></tr></table></figure></li>
+<li>ns3.iqiyi.com的A记录 <code>dig ns3.iqiyi.com</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; ns3.iqiyi.com</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 11375</span><br><span class="line">;; flags: qr rd ra ad; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="line"></span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;ns3.iqiyi.com.			IN	A</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">ns3.iqiyi.com.		296	IN	A	43.225.84.1</span><br><span class="line"></span><br><span class="line">;; Query time: 51 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:49:07 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 47</span><br></pre></td></tr></table></figure></li>
+<li>MX记录 <code>dig iqiyi.com mx</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com mx</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 16303</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="line"></span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	MX</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		300	IN	MX	10 mx1.iqiyi.com.</span><br><span class="line"></span><br><span class="line">;; Query time: 9 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:50:26 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 47</span><br></pre></td></tr></table></figure></li>
+<li>TXT记录 <code>dig iqiyi.com txt</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com txt</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 28756</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="line"></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: 0, flags:; udp: 4096</span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	TXT</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		600	IN	TXT	&quot;92qpmvb8qgzqbvndvbgtrn9nlys14bxh&quot;</span><br><span class="line">iqiyi.com.		600	IN	TXT	&quot;v&#x3D;spf1 ip4:202.108.14.100 a mx ~all&quot;</span><br><span class="line"></span><br><span class="line">;; Query time: 64 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:51:45 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 131</span><br></pre></td></tr></table></figure></li>
+<li>SRV、PTR<br>SRV与PRT不常用，所以iqiyi.com的域名服务器并没有配置这两项。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.ruanyifeng.com/blog/2016/06/dns.html" target="_blank" rel="noopener">DNS 原理入门</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/29/dns-data-type-md/" rel="prev" title="DNS数据与类型">
+      <i class="fa fa-chevron-left"></i> DNS数据与类型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/01/05/mono-create/" rel="next" title="Mono/FluxCreate —— 传统代码转为Reactive的桥梁">
+      Mono/FluxCreate —— 传统代码转为Reactive的桥梁 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dig命令"><span class="nav-number">1.</span> <span class="nav-text">dig命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dig举例"><span class="nav-number">2.</span> <span class="nav-text">dig举例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dig查询"><span class="nav-number">2.1.</span> <span class="nav-text">dig查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dig-short-简单查询"><span class="nav-number">2.2.</span> <span class="nav-text">dig +short 简单查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dig分级查询"><span class="nav-number">2.3.</span> <span class="nav-text">dig分级查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#记录类型举例"><span class="nav-number">3.</span> <span class="nav-text">记录类型举例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Isaac Gao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Isaac Gao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">28k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">25 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1278301445&web_id=1278301445"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

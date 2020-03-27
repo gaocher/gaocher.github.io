@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://gaocher.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="基础概念介绍1. 一个简单服务器的基本流程graph TB C --建立--&gt; D C --建立--&gt; D1 subgraph Socket生命周期 D1(收到客户端连接完成) --&gt; E1(生成普通Socket资源) E1 --&gt; F1 F1(Socket读写) --while loop --&gt; F1 F1 --&gt; G1((关闭)) end subgraph Socket生命周期 D(收到客户端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nio系列之Java Nio">
+<meta property="og:url" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2019&#x2F;12&#x2F;20&#x2F;Java_Nio&#x2F;index.html">
+<meta property="og:site_name" content="Isaac&#39;s博客">
+<meta property="og:description" content="基础概念介绍1. 一个简单服务器的基本流程graph TB C --建立--&gt; D C --建立--&gt; D1 subgraph Socket生命周期 D1(收到客户端连接完成) --&gt; E1(生成普通Socket资源) E1 --&gt; F1 F1(Socket读写) --while loop --&gt; F1 F1 --&gt; G1((关闭)) end subgraph Socket生命周期 D(收到客户端">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;images&#x2F;java_nio_relation.png">
+<meta property="article:published_time" content="2019-12-20T03:33:32.000Z">
+<meta property="article:modified_time" content="2019-12-29T15:25:39.512Z">
+<meta property="article:author" content="Isaac Gao">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;images&#x2F;java_nio_relation.png">
+
+<link rel="canonical" href="https://gaocher.github.io/2019/12/20/Java_Nio/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Nio系列之Java Nio | Isaac's博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Isaac's博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Isaac's博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2019/12/20/Java_Nio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nio系列之Java Nio
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-20 11:33:32" itemprop="dateCreated datePublished" datetime="2019-12-20T11:33:32+08:00">2019-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-29 23:25:39" itemprop="dateModified" datetime="2019-12-29T23:25:39+08:00">2019-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/Nio/" itemprop="url" rel="index">
+                    <span itemprop="name">Nio</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基础概念介绍"><a href="#基础概念介绍" class="headerlink" title="基础概念介绍"></a>基础概念介绍</h1><h2 id="1-一个简单服务器的基本流程"><a href="#1-一个简单服务器的基本流程" class="headerlink" title="1. 一个简单服务器的基本流程"></a>1. 一个简单服务器的基本流程</h2><pre class="mermaid">graph TB
+C --建立--> D
+C --建立--> D1
+subgraph Socket生命周期
+D1(收到客户端连接完成) --> E1(生成普通Socket资源)
+E1 --> F1
+F1(Socket读写) --while loop --> F1
+F1 --> G1((关闭))
+end
+subgraph Socket生命周期
+D(收到客户端连接完成) --> E(生成普通Socket资源)
+E --> F
+F(Socket读写) --while loop --> F
+F --> G((关闭))
+end
+subgraph 创建Server Socket
+A(创建服务Socket资源) --> B(绑定服务端口)
+B --> C(开始监听Accept)
+end</pre>
+
+<h2 id="2-一切皆资源"><a href="#2-一切皆资源" class="headerlink" title="2. 一切皆资源"></a>2. 一切皆资源</h2><p>在Linux世界里，所有的资源都用描述符来表示，且对于IO资源都虚拟化为了文件，所以IO的描述符都叫文件描述即fd (file descriptor)。</p>
+<p>在简单服务器里，主要有两类资源，即服务端Server Socket以及普通连接Socket。</p>
+<ul>
+<li>ServerSocket负责服务端口监听，当有请求进来时建立与客户端通信的socket连接。</li>
+<li>普通Socket负责与客户端的读写通信。</li>
+</ul>
+<p>例如Http是80端口，服务前监听80端口，然后每接收到一个请求，则建立一个普通的Socket。建立完Socket后，此后与客户端通信都只与这个socket有关，与ServerSocket无关了。</p>
+<h2 id="3-Bio-v-s-Nio"><a href="#3-Bio-v-s-Nio" class="headerlink" title="3. Bio v.s. Nio"></a>3. Bio v.s. Nio</h2><p>Bio: 顾名思义，在等待资源ready的时候都会阻塞，例如accept以及read和write。操作系统默认行为就是阻塞的，此时如果资源没有准备好，就会阻塞当前线程。</p>
+<p>由于IO会阻塞线程，所以对于BIO而言，就会有one connection per thread模型，即一个连接(connection)需要配一个线程。这种模式在大量连接时会存在缺陷，例如有一万个用户连接，就需要创建一万个线程，而线程也是要耗不少资源的，假如一个线程占内存512K，则一万个线程需要5G内存，所以导致难以支持一万个连接，更多细节请查看C10K问题。 （一个衍生：创建一个线程需要多少资源）</p>
+<p>为了解决C10K问题，为此引入了nio。顾名思义，nio是指IO不会阻塞，但nio重点并不是为了非阻塞，为的是<strong>通过非阻塞进而引入的线程模型的变化，即可以通过利用一个线程来管理多个连接（Connection）资源，即multiple connection per thread模型</strong>。</p>
+<h1 id="Java-Nio"><a href="#Java-Nio" class="headerlink" title="Java Nio"></a>Java Nio</h1><p>先以一个简单的EchoServer为例，来介绍下Java Nio涉及到的核心知识。</p>
+<h2 id="1-简单EchoServer示例"><a href="#1-简单EchoServer示例" class="headerlink" title="1. 简单EchoServer示例"></a>1. 简单EchoServer示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.gaocher.learning.server.javanio;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.InetSocketAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SelectionKey;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.Selector;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.ServerSocketChannel;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SocketChannel;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Isaac Gao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/12/19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EchoServer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Selector selector;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      selector = Selector.open();</span><br><span class="line"><span class="comment">//            We have to set connection host, port and non-blocking mode</span></span><br><span class="line">      ServerSocketChannel socket = ServerSocketChannel.open();</span><br><span class="line">      ServerSocket serverSocket = socket.socket();</span><br><span class="line">      serverSocket.bind(<span class="keyword">new</span> InetSocketAddress(<span class="string">"localhost"</span>, <span class="number">8089</span>));</span><br><span class="line">      socket.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">      <span class="keyword">int</span> ops = socket.validOps();</span><br><span class="line">      SelectionKey register = socket.register(selector, ops, <span class="keyword">null</span>);</span><br><span class="line">      <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        selector.select();</span><br><span class="line">        Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();</span><br><span class="line">        Iterator&lt;SelectionKey&gt; i = selectedKeys.iterator();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i.hasNext()) &#123;</span><br><span class="line">          SelectionKey key = i.next();</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line"><span class="comment">//                        New client has been accepted</span></span><br><span class="line">            handleAccept(socket, key);</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line"><span class="comment">//                        We can run non-blocking operation READ on our client</span></span><br><span class="line">            String data = handleRead(key);</span><br><span class="line">            handleWrite( data, (SocketChannel)key.channel());</span><br><span class="line">          &#125;</span><br><span class="line">          i.remove();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handleAccept</span><span class="params">(ServerSocketChannel mySocket,</span></span></span><br><span class="line"><span class="function"><span class="params">      SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"Connection Accepted..."</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Accept the connection and set non-blocking mode</span></span><br><span class="line">    SocketChannel client = mySocket.accept();</span><br><span class="line">    client.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Register that client is reading this channel</span></span><br><span class="line">    client.register(selector, SelectionKey.OP_READ);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">handleRead</span><span class="params">(SelectionKey key)</span></span></span><br><span class="line"><span class="function">      <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Reading..."</span>);</span><br><span class="line">    <span class="comment">// create a ServerSocketChannel to read the request</span></span><br><span class="line">    SocketChannel client = (SocketChannel) key.channel();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create buffer to read data</span></span><br><span class="line">    ByteBuffer buffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">    client.read(buffer);</span><br><span class="line"><span class="comment">//        Parse data from buffer to String</span></span><br><span class="line">    String data = <span class="keyword">new</span> String(buffer.array()).trim();</span><br><span class="line">    <span class="keyword">if</span> (data.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">"Received message: "</span> + data);</span><br><span class="line">      <span class="keyword">if</span> (data.equalsIgnoreCase(<span class="string">"exit"</span>)) &#123;</span><br><span class="line">        client.close();</span><br><span class="line">        System.out.println(<span class="string">"Connection closed..."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handleWrite</span><span class="params">(String data, SocketChannel client)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = data.getBytes();</span><br><span class="line">    ByteBuffer wrap = ByteBuffer.wrap(bytes);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      client.write(wrap);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-java-nio-核心概念"><a href="#2-java-nio-核心概念" class="headerlink" title="2. java nio 核心概念"></a>2. java nio 核心概念</h2><p>为了支持nio，java提供了一套抽象模型，即Selector、Channel、Buffer，除此之外，为了方便编程，还提供了一个组合体SelectionKey。</p>
+<ul>
+<li>Selector: 对多个Connection进行管理，负责对感兴趣的事件（interested ops）进行注册监听</li>
+<li>Channel：对Socket的抽象，即代表连接，读写操作都在此进行。</li>
+<li>Buffer：读写缓冲，用户态的内存用于与内核态的数据buffer进行交换。</li>
+<li>SelectionKey：用于表示一个Selector与Channel，重点是<strong>attach的对象，可以方便的用于与Channel相关的Context存储</strong>。</li>
+</ul>
+<p>具体关系如下：<br><img src="/images/java_nio_relation.png" alt="Java Nio关系图"></p>
+<p>一个channel为什么会有多个key？一个channel可被多个selector注册监听，所以需要用数组来保存keys。</p>
+<p>除了上面几个核心概念外，还有一个，就是ops，表示要关注的IO操作。</p>
+<p>虽然在关注的事件用Ops（Operation操作）来表示，但其实<strong>应该用事件event更贴切</strong>，其实Nio就是一个<strong>基于事件的网络模型</strong>。为了简化，Java将事件总共分为四种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static final int OP_READ &#x3D; 1 &lt;&lt; 0;</span><br><span class="line"></span><br><span class="line">public static final int OP_WRITE &#x3D; 1 &lt;&lt; 2;</span><br><span class="line"></span><br><span class="line">public static final int OP_CONNECT &#x3D; 1 &lt;&lt; 3;</span><br><span class="line"></span><br><span class="line">public static final int OP_ACCEPT &#x3D; 1 &lt;&lt; 4;</span><br></pre></td></tr></table></figure>
+<p>其中serversocketChannel只有Accept，另外三个属于普通的SocketChannel，为了方便，java通过Channel.validOps()硬编码了这个知识。</p>
+<h2 id="3-基本流程"><a href="#3-基本流程" class="headerlink" title="3. 基本流程"></a>3. 基本流程</h2><ol>
+<li><p>创建相关资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">selector &#x3D; Selector.open();</span><br><span class="line">ServerSocketChannel socket &#x3D; ServerSocketChannel.open();</span><br><span class="line">ServerSocket serverSocket &#x3D; socket.socket();</span><br><span class="line">serverSocket.bind(new InetSocketAddress(&quot;localhost&quot;, 8089));</span><br><span class="line">socket.configureBlocking(false);</span><br></pre></td></tr></table></figure></li>
+<li><p>注册channel到selector</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int ops &#x3D; socket.validOps();</span><br><span class="line">SelectionKey register &#x3D; socket.register(selector, ops, null);</span><br></pre></td></tr></table></figure></li>
+<li><p>开启循环监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while(true) &#123;</span><br><span class="line">    selector.select(); &#x2F;&#x2F;若无事件产生，则阻塞</span><br><span class="line">    Set&lt;SelectionKey&gt; selectedKeys &#x3D; selector.selectedKeys(); &#x2F;&#x2F;获取已经ready的SelectionKey</span><br><span class="line">    &#x2F;&#x2F;... 进行读写、关闭等操作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>处理事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SelectionKey key &#x3D; i.next();</span><br><span class="line"></span><br><span class="line">if (key.isAcceptable()) &#123;</span><br><span class="line">  &#x2F;&#x2F; New client has been accepted</span><br><span class="line">  handleAccept(socket, key);</span><br><span class="line">&#125; else if (key.isReadable()) &#123;</span><br><span class="line">  &#x2F;&#x2F; We can run non-blocking operation READ on our client</span><br><span class="line">  String data &#x3D; handleRead(key);</span><br><span class="line">  handleWrite( data, (SocketChannel)key.channel());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，这里写数据的时候并没有使用Nio，而是直接调用channel.write（Bio的方式）的方式来实现，因为写数据往往都是ready的，除非是缓冲区已满无法写入。所以对于写操作而言，用Bio方式更快一些。</p>
+</li>
+<li><p>删除事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;SelectionKey&gt; i &#x3D; selectedKeys.iterator();</span><br><span class="line">&#x2F;&#x2F;...</span><br><span class="line">i.remove();</span><br></pre></td></tr></table></figure>
+<p>Selector不会对selectedKeys做删除，当有事件触发后，则key会一直存在，所以需要手动删除。</p>
+</li>
+</ol>
+<h2 id="4-doSelect源码"><a href="#4-doSelect源码" class="headerlink" title="4. doSelect源码"></a>4. doSelect源码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">doSelect</span><span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (closed)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ClosedSelectorException();</span><br><span class="line">    processDeregisterQueue();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        begin();</span><br><span class="line">        pollWrapper.poll(timeout);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        end();</span><br><span class="line">    &#125;</span><br><span class="line">    processDeregisterQueue(); <span class="comment">//对于需要cancel的key进行deregister</span></span><br><span class="line">    <span class="keyword">int</span> numKeysUpdated = updateSelectedKeys();</span><br><span class="line">    <span class="keyword">if</span> (pollWrapper.interrupted()) &#123;</span><br><span class="line">        <span class="comment">// Clear the wakeup pipe</span></span><br><span class="line">        pollWrapper.putEventOps(pollWrapper.interruptedIndex(), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">synchronized</span> (interruptLock) &#123;</span><br><span class="line">            pollWrapper.clearInterrupted();</span><br><span class="line">            IOUtil.drain(fd0);</span><br><span class="line">            interruptTriggered = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> numKeysUpdated;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">updateSelectedKeys</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> entries = pollWrapper.updated;</span><br><span class="line">    <span class="keyword">int</span> numKeysUpdated = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;entries; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> nextFD = pollWrapper.getDescriptor(i);</span><br><span class="line">        SelectionKeyImpl ski = fdToKey.get(Integer.valueOf(nextFD));</span><br><span class="line">        <span class="comment">// ski is null in the case of an interrupt</span></span><br><span class="line">        <span class="keyword">if</span> (ski != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> rOps = pollWrapper.getEventOps(i);</span><br><span class="line">            <span class="keyword">if</span> (selectedKeys.contains(ski)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ski.channel.translateAndSetReadyOps(rOps, ski)) &#123;</span><br><span class="line">                    numKeysUpdated++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ski.channel.translateAndSetReadyOps(rOps, ski);</span><br><span class="line">                <span class="keyword">if</span> ((ski.nioReadyOps() &amp; ski.nioInterestOps()) != <span class="number">0</span>) &#123;</span><br><span class="line">                    selectedKeys.add(ski);</span><br><span class="line">                    numKeysUpdated++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> numKeysUpdated;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>processDeregisterQueue()</li>
+</ul>
+<p>有注册就有解注册，在主循环里，除了返回感兴趣的事件外，也要对不需要的key进行删除，例如channel已经关闭，则与该channel相关的key就需要删除，否则selector关注的key会越来越多，而导致性能变慢。</p>
+<ul>
+<li>updateSelectedKeys</li>
+</ul>
+<p>根据操作系统底层返回的描述符fd，利用fdToKey获取java层面的SelectionKey</p>
+<ul>
+<li>translateAndSetReadyOps</li>
+</ul>
+<p>将底层IO操作转义为java的Nio操作。由于Nio要支持多种协议，不单单只是tcp，所以要将其他IO操作转义为Java定义的4种IO操作。</p>
+<ul>
+<li>为什么需要ski.nioReadyOps() &amp; ski.nioInterestOps()进行对比</li>
+</ul>
+<p>因为write事件是一直ready的，若不和interestOps比较，会频繁触发该Key。</p>
+<h2 id="5-selector成员变量"><a href="#5-selector成员变量" class="headerlink" title="5. selector成员变量"></a>5. selector成员变量</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Set&lt;SelectionKey&gt; selectedKeys = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">protected</span> HashSet&lt;SelectionKey&gt; keys = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">private</span> Set&lt;SelectionKey&gt; publicKeys;</span><br><span class="line"><span class="keyword">private</span> Set&lt;SelectionKey&gt; publicSelectedKeys;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="title">SelectorImpl</span><span class="params">(SelectorProvider var1)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">super</span>(var1);</span><br><span class="line">  <span class="keyword">if</span> (Util.atBugLevel(<span class="string">"1.4"</span>)) &#123;</span><br><span class="line">    <span class="keyword">this</span>.publicKeys = <span class="keyword">this</span>.keys;</span><br><span class="line">    <span class="keyword">this</span>.publicSelectedKeys = <span class="keyword">this</span>.selectedKeys;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.publicKeys = Collections.unmodifiableSet(<span class="keyword">this</span>.keys);</span><br><span class="line">    <span class="keyword">this</span>.publicSelectedKeys = Util.ungrowableSet(<span class="keyword">this</span>.selectedKeys);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>keys: 所有用户感兴趣的SelectionKey，每个channel只注册一个key到selector上，<strong>重复注册无效</strong></li>
+<li>selectedKeys: 监听到对应事件的keys而返回。<strong>selectedKeys不会做删除，当有事件触发后，则key会一直存在。所以需要手动删除。即需要selectedKeys.iterator().remove()</strong></li>
+<li>public*: 用户可访问的key，对原始的key进行不可修改或不可增长的封装</li>
+<li>selectedKeys.iterator().remove()：只是从selectedKeys列表里去除，并没有删除key本身，key本身仍然在channel里被引用，所以无需担心会重新创建而有影响。</li>
+</ul>
+<h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p>本文只是初略的概括了Nio在java中的使用，但并未深入到在真实案例中的使用，例如nio在tomcat与netty下的具体实现，后续会继续展开描述，nio在tomcat与netty下的实战。除此以外，还有以下细节并未探索：</p>
+<ol>
+<li>LT模式 v.s. ET模式<ul>
+<li>LT模式 —— 如何利用de-register来优化selector监听</li>
+<li>ET模式时，Write事件会一直有吗？</li>
+</ul>
+</li>
+<li>de-register后，何时重新注册ops</li>
+<li>同样的端口，操作系统如何区分ServerSocket与普通socket。</li>
+<li>PollSelector初始化详细过程</li>
+<li>Buffer为什么需要flip（读写共用）</li>
+<li>如何知道connection已经断开</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/17/first-blog/" rel="prev" title="用Hexo建立Git Hub 博客">
+      <i class="fa fa-chevron-left"></i> 用Hexo建立Git Hub 博客
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/29/dns-data-type-md/" rel="next" title="DNS数据与类型">
+      DNS数据与类型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础概念介绍"><span class="nav-number">1.</span> <span class="nav-text">基础概念介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-一个简单服务器的基本流程"><span class="nav-number">1.1.</span> <span class="nav-text">1. 一个简单服务器的基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-一切皆资源"><span class="nav-number">1.2.</span> <span class="nav-text">2. 一切皆资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Bio-v-s-Nio"><span class="nav-number">1.3.</span> <span class="nav-text">3. Bio v.s. Nio</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Nio"><span class="nav-number">2.</span> <span class="nav-text">Java Nio</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简单EchoServer示例"><span class="nav-number">2.1.</span> <span class="nav-text">1. 简单EchoServer示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-java-nio-核心概念"><span class="nav-number">2.2.</span> <span class="nav-text">2. java nio 核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-基本流程"><span class="nav-number">2.3.</span> <span class="nav-text">3. 基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-doSelect源码"><span class="nav-number">2.4.</span> <span class="nav-text">4. doSelect源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-selector成员变量"><span class="nav-number">2.5.</span> <span class="nav-text">5. selector成员变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遗留问题"><span class="nav-number">3.</span> <span class="nav-text">遗留问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Isaac Gao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Isaac Gao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">28k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">25 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1278301445&web_id=1278301445"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

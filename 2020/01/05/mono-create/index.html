@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://gaocher.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Project Reactor提供了很多创建Mono&#x2F;Flux的静态方法，而最常用的就是Mono#create方法，通过该方法能把以前命令式的程序转化为Reactive的编程方式。众所周知，Reactive Programming是一种Pull-Push模型，其中Pull用于实现back-pressure，push则是常见的推模型，也是reactive programming的重点（这里不再深入讲">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mono&#x2F;FluxCreate —— 传统代码转为Reactive的桥梁">
+<meta property="og:url" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2020&#x2F;01&#x2F;05&#x2F;mono-create&#x2F;index.html">
+<meta property="og:site_name" content="Isaac&#39;s博客">
+<meta property="og:description" content="Project Reactor提供了很多创建Mono&#x2F;Flux的静态方法，而最常用的就是Mono#create方法，通过该方法能把以前命令式的程序转化为Reactive的编程方式。众所周知，Reactive Programming是一种Pull-Push模型，其中Pull用于实现back-pressure，push则是常见的推模型，也是reactive programming的重点（这里不再深入讲">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-01-05T13:32:13.000Z">
+<meta property="article:modified_time" content="2020-01-06T09:24:20.248Z">
+<meta property="article:author" content="Isaac Gao">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://gaocher.github.io/2020/01/05/mono-create/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Mono/FluxCreate —— 传统代码转为Reactive的桥梁 | Isaac's博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Isaac's博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Isaac's博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2020/01/05/mono-create/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Mono/FluxCreate —— 传统代码转为Reactive的桥梁
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-05 21:32:13" itemprop="dateCreated datePublished" datetime="2020-01-05T21:32:13+08:00">2020-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 17:24:20" itemprop="dateModified" datetime="2020-01-06T17:24:20+08:00">2020-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project-Reactor/" itemprop="url" rel="index">
+                    <span itemprop="name">Project Reactor</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><code>Project Reactor</code>提供了很多创建Mono/Flux的静态方法，而最常用的就是Mono#create方法，通过该方法能把以前命令式的程序转化为Reactive的编程方式。<br>众所周知，Reactive Programming是一种Pull-Push模型，其中Pull用于实现back-pressure，push则是常见的推模型，也是reactive programming的重点（这里不再深入讲解pull/push模型两者的区别）。下面以一个常见的Pull模型迭代器Iterator来说明如何将传统代码转为Reactive的代码。</p>
+<h1 id="Iterator-gt-Flux"><a href="#Iterator-gt-Flux" class="headerlink" title="Iterator -&gt; Flux"></a>Iterator -&gt; Flux</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个迭代器</span></span><br><span class="line">Iterator it = Arrays.asList&lt;&gt;(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>).iterator();</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用迭代器</span></span><br><span class="line"><span class="keyword">while</span>(it.hasNext()) &#123;</span><br><span class="line">    <span class="comment">//模拟业务逻辑 —— 这里直接打印value</span></span><br><span class="line">    System.out.println(it.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面是一个常见的迭代器使用方式，下面看看是如何将迭代器转换成Flux的:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建迭代器</span></span><br><span class="line">Iterator it = Arrays.asList&lt;&gt;(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>).iterator();</span><br><span class="line"></span><br><span class="line">Flux&lt;Integer&gt; iteratorFlux = Flux.create(sink -&gt; &#123;</span><br><span class="line">    <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">        sink.next(it.next()); <span class="comment">//利用FluxSink实现data的Push</span></span><br><span class="line">    &#125;</span><br><span class="line">    sink.complete();  <span class="comment">//发送结束的Signal</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//进行订阅，进行业务逻辑操作</span></span><br><span class="line">iteratorFlux.subscribe(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<h1 id="MonoCreate常见的两者使用方式"><a href="#MonoCreate常见的两者使用方式" class="headerlink" title="MonoCreate常见的两者使用方式"></a>MonoCreate常见的两者使用方式</h1><p>传统命令式编程除了Iterator的Pull模式外，通常还有Observable以及Callback这两种Push模式，下面分别举例讲讲这两种模式。</p>
+<h2 id="Observable-gt-MonoCreate"><a href="#Observable-gt-MonoCreate" class="headerlink" title="Observable -&gt; MonoCreate"></a>Observable -&gt; MonoCreate</h2><p>Observable原始代码举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable observable = <span class="keyword">new</span> Observable() &#123;</span><br><span class="line">    <span class="comment">//需要重写Observable，默认是setChanged与notifyObservers分离，实现先提交再通知的效果</span></span><br><span class="line">    <span class="comment">//这里为了简单起见，将通知与提交放在了一起</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</span><br><span class="line">    setChanged();</span><br><span class="line">    <span class="keyword">super</span>.notifyObservers(arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Observer first = (ob,value) -&gt; &#123;</span><br><span class="line">    System.out.println(<span class="string">"value is "</span> + value);</span><br><span class="line">&#125;;</span><br><span class="line">observable.addObserver(first);</span><br><span class="line">observable.notifyObservers(<span class="string">"42"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//    after some time, cancel observer to dispose resource</span></span><br><span class="line">observable.deleteObserver(first);</span><br></pre></td></tr></table></figure>
+<p>MonoCreate的转化示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Mono&lt;Object&gt; observableMono = Mono.create(sink -&gt; &#123;</span><br><span class="line">    Observer first = (ob, value) -&gt; &#123;</span><br><span class="line">        sink.success(value);</span><br><span class="line">    &#125;;</span><br><span class="line">    observable.addObserver(first);</span><br><span class="line">    observable.notifyObservers(<span class="string">"42"</span>);</span><br><span class="line">    sink.onDispose(() -&gt; observable.deleteObserver(first));</span><br><span class="line">&#125;);</span><br><span class="line">observableMono.subscribe(v -&gt; System.out.println(<span class="string">"value is "</span> + v));</span><br></pre></td></tr></table></figure>
+
+<h2 id="Callback-gt-MonoCreate"><a href="#Callback-gt-MonoCreate" class="headerlink" title="Callback -&gt; MonoCreate"></a>Callback -&gt; MonoCreate</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//callback example</span></span><br><span class="line">FutureCallback&lt;HttpResponse&gt; callback = <span class="keyword">new</span> FutureCallback&lt;HttpResponse&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">completed</span><span class="params">(HttpResponse result)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Response: "</span> + result.getStatusLine());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">failed</span><span class="params">(Exception ex)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Fail in "</span> + ex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancelled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Cancelled"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();</span><br><span class="line">httpclient.start();</span><br><span class="line"></span><br><span class="line">HttpGet request = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.example.com/"</span>);</span><br><span class="line">httpclient.execute(request, callback);</span><br></pre></td></tr></table></figure>
+<p>MonoCreate的转化示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();</span><br><span class="line">httpclient.start();</span><br><span class="line"></span><br><span class="line">Mono&lt;HttpResponse&gt; responseMono = Mono.create(monoSink -&gt; &#123;</span><br><span class="line">    <span class="comment">//创建response callback的处理类，并传入monoSink供使用</span></span><br><span class="line">    CallbackHandler callbackHandler = <span class="keyword">new</span> CallbackHandler(monoSink);</span><br><span class="line">    HttpGet getRequest = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.example.com/"</span>);</span><br><span class="line">    httpclient.execute(getRequest, callbackHandler.getResponseCallback());</span><br><span class="line">&#125;);</span><br><span class="line">responseMono.subscribe(response -&gt; System.out.println(<span class="string">"Response: "</span> + response.getStatusLine()));</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CallbackHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> MonoSink monoSink;</span><br><span class="line">    <span class="keyword">private</span> FutureCallback&lt;HttpResponse&gt; responseCallback;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CallbackHandler</span><span class="params">(MonoSink monoSink)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.monoSink = monoSink;</span><br><span class="line">        responseCallback = <span class="keyword">new</span> FutureCallback&lt;HttpResponse&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">completed</span><span class="params">(HttpResponse result)</span> </span>&#123;</span><br><span class="line">                monoSink.success(result);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">failed</span><span class="params">(Exception ex)</span> </span>&#123;</span><br><span class="line">                monoSink.error(ex);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancelled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                monoSink.onDispose(() -&gt; System.out.println(<span class="string">"cancelled"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="MonoSink"><a href="#MonoSink" class="headerlink" title="MonoSink"></a>MonoSink</h1><p>从前面已经可以看到，将传统代码转变为Reactive方式的关键是在于sink，在创建Mono/FluxCreate的时候，Mono/Flux都会提供相应的sink给使用方来使用。MonoSink相比FluxSink要简单的多，为了简单起见，我们先从MonoSink来了解sink的运行原理（FluxSink会专门另开一篇来说明）。下面就来探探Mono下的MonoSink究竟到底是什么。</p>
+<p>再深入MonoSink之前，我们先来看看MonoCreate是怎么使用MonoSink的，对于Reactor来说，所有的入口都是<code>subscribe</code>方法，所以先来看看MonoCreate的subscribe方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(CoreSubscriber&lt;? <span class="keyword">super</span> T&gt; actual)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1. 创建MonoSink实例，供MonoCreate来使用</span></span><br><span class="line">    <span class="comment">//如变量名字emitter一样，MonoSink的作用其实就是信号的发射器（signal emitter）</span></span><br><span class="line">    DefaultMonoSink&lt;T&gt; emitter = <span class="keyword">new</span> DefaultMonoSink&lt;&gt;(actual);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2. emitter除了是sink外，也实现了subscription，供Subscriber使用</span></span><br><span class="line">    <span class="comment">//这一步，调用Subscriber的onSubscribe方法，其内部则会调用subscription的request方法 （后续会重点说DefaultMonoSink的request方法）</span></span><br><span class="line">    actual.onSubscribe(emitter);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//3. callback就是在Mono.create时候传入的Mono构造器</span></span><br><span class="line">        <span class="comment">//此步骤即调用Mono构造器函数，并将sink传入</span></span><br><span class="line">        callback.accept(emitter);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">        emitter.error(Operators.onOperatorError(ex, actual.currentContext()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的源代码可以看出，整个MonoCreate订阅过程很简单，主要是分为三个步骤：</p>
+<ol>
+<li>创建DefaultMonoSink <em>(通过这一步可以看出，一个Subscriber是独占一个MonoSink的)</em></li>
+<li>实现Subscriber的onSubscribe的方法</li>
+<li>调用Mono#create的构造器函数</li>
+</ol>
+<p>以上三个步骤是从整体视角来看的，我们再进一步进入DefaultMonoSink，以它的内部视角，来看看到底作为signal emitter的MonoSink做了些什么。</p>
+<h2 id="MonoSink-内部状态"><a href="#MonoSink-内部状态" class="headerlink" title="MonoSink 内部状态"></a>MonoSink 内部状态</h2><p>MonoSink内部主要有4个状态:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> state; <span class="comment">//初始默认状态0，即未调用Request且未赋值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NO_REQUEST_HAS_VALUE  = <span class="number">1</span>; <span class="comment">//未调用Request但已经赋值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HAS_REQUEST_NO_VALUE  = <span class="number">2</span>; <span class="comment">//调用了Request但还未赋值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HAS_REQUEST_HAS_VALUE = <span class="number">3</span>; <span class="comment">//调用了Request且已经赋值了</span></span><br></pre></td></tr></table></figure>
+<p>这三个状态主要取决于request和success(或者error)的调用时机，调用了request方法则会是<code>HAS_REQUEST</code>，调用了success(或者error)方法则会是<code>HAS_VALUE</code>，其中request方法调用是由Subscriber#onSubscribe调用的，success或者error则是由具体使用者来调用的，如Callback。由于success或者error调用时机往往不可能确定（通常是异步的），所以才产生了上述4种状态。</p>
+<p>以同步的角度思考，通常是先调用request然后再调用success或者error方法，其中success会对应调用Subscriber的onNext与onComplete方法，error方法则会调用对应的Subscriber#onError方法。但事情往往没这么简单，就如前面提到的，request方法与success/error方法是乱序的，很有可能在request的时候，success/error方法已经调用结束了。为了解决这个问题，每个方法都引入了for-loop加CAS的多线程操作，变得相对复杂了，但只要知道其内部原理，再复杂的代码看起来就都有线索了，下面以request方法为例，来讲讲是MonoSink是如何解决多线程问题的。</p>
+<h2 id="MonoSink-request方法解释"><a href="#MonoSink-request方法解释" class="headerlink" title="MonoSink request方法解释"></a>MonoSink request方法解释</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">(<span class="keyword">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Operators.validate(n)) &#123;</span><br><span class="line">        LongConsumer consumer = requestConsumer;</span><br><span class="line">        <span class="comment">//1. 如果传入了requestConsumer，则调用</span></span><br><span class="line">        <span class="comment">//requestConsumer是通过onRequest方法传入的</span></span><br><span class="line">        <span class="keyword">if</span> (consumer != <span class="keyword">null</span>) &#123;</span><br><span class="line">            consumer.accept(n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//2. 进入for loop来实现自旋</span></span><br><span class="line">        <span class="keyword">for</span> (; ; ) &#123;</span><br><span class="line">            <span class="keyword">int</span> s = state;</span><br><span class="line">            <span class="comment">//2.1 HAS_Request: 已经调用过了，直接退出</span></span><br><span class="line">            <span class="keyword">if</span> (s == HAS_REQUEST_NO_VALUE || s == HAS_REQUEST_HAS_VALUE) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (s == NO_REQUEST_HAS_VALUE) &#123;</span><br><span class="line">                <span class="comment">// 2.2 double check 是否已经有值</span></span><br><span class="line">                <span class="comment">// 如果是，执行onNext/onComplete方法，并设置完成状态: HAS_REQUEST_HAS_VALUE</span></span><br><span class="line">                <span class="comment">// 如果不是，double check失败，直接退出，说明有别的线程已经执行了该方法了</span></span><br><span class="line">                <span class="keyword">if</span> (STATE.compareAndSet(<span class="keyword">this</span>, s, HAS_REQUEST_HAS_VALUE)) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        actual.onNext(value);</span><br><span class="line">                        actual.onComplete();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">finally</span> &#123;</span><br><span class="line">                        <span class="comment">//释放资源 - 具体调用的disposable对象由onDisposable方法赋值</span></span><br><span class="line">                        disposeResource(<span class="keyword">false</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.3 正常流程，值没有被赋值，设置为HAS_REQUEST_NO_VALUE</span></span><br><span class="line">            <span class="keyword">if</span> (STATE.compareAndSet(<span class="keyword">this</span>, s, HAS_REQUEST_NO_VALUE)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MonoSink回调方法"><a href="#MonoSink回调方法" class="headerlink" title="MonoSink回调方法"></a>MonoSink回调方法</h2><p>MonoSink除了request、success、error方法外，还提供了几个回调函数，以供使用者使用，主要有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//request的时候会被调用，获取request的数量N</span></span><br><span class="line"><span class="function">MonoSink&lt;T&gt; <span class="title">onRequest</span><span class="params">(LongConsumer consumer)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Subscriber调用subscription.cancel是会调用该Disposable方法</span></span><br><span class="line"><span class="function">MonoSink&lt;T&gt; <span class="title">onCancel</span><span class="params">(Disposable d)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//与onCancel类似，区别是，除了onCancel方法，在onComplete以及onError也会调用该Disposable方法</span></span><br><span class="line"><span class="function">MonoSink&lt;T&gt; <span class="title">onDispose</span><span class="params">(Disposable d)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这里简单讲一下Reactor的代码命名规范，对于回调函数都是以onXXX方式命名，注意调用该onXXX方式的时候，<strong>并不是直接调用，而只是传入该回调方法，待对应的事件信号发生时，才会真的被调用</strong>。这也是声明式编程的一个特色，先声明再执行。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文首先描述了传统命令式的代码如何转换为Reactive方式的代码，然后就其内部MonoSink就行了深入的了解，重点讲解了其实现形式，通过对MonoSink的剖析，能够更具体的对Mono整体的使用方式的了解。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/29/dig-and-dns-record-type/" rel="prev" title="dig与记录类型举例">
+      <i class="fa fa-chevron-left"></i> dig与记录类型举例
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Iterator-gt-Flux"><span class="nav-number">1.</span> <span class="nav-text">Iterator -&gt; Flux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MonoCreate常见的两者使用方式"><span class="nav-number">2.</span> <span class="nav-text">MonoCreate常见的两者使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Observable-gt-MonoCreate"><span class="nav-number">2.1.</span> <span class="nav-text">Observable -&gt; MonoCreate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Callback-gt-MonoCreate"><span class="nav-number">2.2.</span> <span class="nav-text">Callback -&gt; MonoCreate</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MonoSink"><span class="nav-number">3.</span> <span class="nav-text">MonoSink</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MonoSink-内部状态"><span class="nav-number">3.1.</span> <span class="nav-text">MonoSink 内部状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MonoSink-request方法解释"><span class="nav-number">3.2.</span> <span class="nav-text">MonoSink request方法解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MonoSink回调方法"><span class="nav-number">3.3.</span> <span class="nav-text">MonoSink回调方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Isaac Gao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Isaac Gao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">28k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">25 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1278301445&web_id=1278301445"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

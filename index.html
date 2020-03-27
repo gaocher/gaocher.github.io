@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://gaocher.github.io').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Isaac&#39;s博客">
+<meta property="og:url" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;index.html">
+<meta property="og:site_name" content="Isaac&#39;s博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Isaac Gao">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://gaocher.github.io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false
+  };
+</script>
+
+  <title>Isaac's博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Isaac's博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Isaac's博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2020/01/05/mono-create/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/01/05/mono-create/" class="post-title-link" itemprop="url">Mono/FluxCreate —— 传统代码转为Reactive的桥梁</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-01-05 21:32:13" itemprop="dateCreated datePublished" datetime="2020-01-05T21:32:13+08:00">2020-01-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-06 17:24:20" itemprop="dateModified" datetime="2020-01-06T17:24:20+08:00">2020-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project-Reactor/" itemprop="url" rel="index">
+                    <span itemprop="name">Project Reactor</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><code>Project Reactor</code>提供了很多创建Mono/Flux的静态方法，而最常用的就是Mono#create方法，通过该方法能把以前命令式的程序转化为Reactive的编程方式。<br>众所周知，Reactive Programming是一种Pull-Push模型，其中Pull用于实现back-pressure，push则是常见的推模型，也是reactive programming的重点（这里不再深入讲解pull/push模型两者的区别）。下面以一个常见的Pull模型迭代器Iterator来说明如何将传统代码转为Reactive的代码。</p>
+<h1 id="Iterator-gt-Flux"><a href="#Iterator-gt-Flux" class="headerlink" title="Iterator -&gt; Flux"></a>Iterator -&gt; Flux</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个迭代器</span></span><br><span class="line">Iterator it = Arrays.asList&lt;&gt;(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>).iterator();</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用迭代器</span></span><br><span class="line"><span class="keyword">while</span>(it.hasNext()) &#123;</span><br><span class="line">    <span class="comment">//模拟业务逻辑 —— 这里直接打印value</span></span><br><span class="line">    System.out.println(it.next());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面是一个常见的迭代器使用方式，下面看看是如何将迭代器转换成Flux的:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建迭代器</span></span><br><span class="line">Iterator it = Arrays.asList&lt;&gt;(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>).iterator();</span><br><span class="line"></span><br><span class="line">Flux&lt;Integer&gt; iteratorFlux = Flux.create(sink -&gt; &#123;</span><br><span class="line">    <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">        sink.next(it.next()); <span class="comment">//利用FluxSink实现data的Push</span></span><br><span class="line">    &#125;</span><br><span class="line">    sink.complete();  <span class="comment">//发送结束的Signal</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//进行订阅，进行业务逻辑操作</span></span><br><span class="line">iteratorFlux.subscribe(System.out::println);</span><br></pre></td></tr></table></figure>
+
+<h1 id="MonoCreate常见的两者使用方式"><a href="#MonoCreate常见的两者使用方式" class="headerlink" title="MonoCreate常见的两者使用方式"></a>MonoCreate常见的两者使用方式</h1><p>传统命令式编程除了Iterator的Pull模式外，通常还有Observable以及Callback这两种Push模式，下面分别举例讲讲这两种模式。</p>
+<h2 id="Observable-gt-MonoCreate"><a href="#Observable-gt-MonoCreate" class="headerlink" title="Observable -&gt; MonoCreate"></a>Observable -&gt; MonoCreate</h2><p>Observable原始代码举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Observable observable = <span class="keyword">new</span> Observable() &#123;</span><br><span class="line">    <span class="comment">//需要重写Observable，默认是setChanged与notifyObservers分离，实现先提交再通知的效果</span></span><br><span class="line">    <span class="comment">//这里为了简单起见，将通知与提交放在了一起</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">(Object arg)</span> </span>&#123;</span><br><span class="line">    setChanged();</span><br><span class="line">    <span class="keyword">super</span>.notifyObservers(arg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">Observer first = (ob,value) -&gt; &#123;</span><br><span class="line">    System.out.println(<span class="string">"value is "</span> + value);</span><br><span class="line">&#125;;</span><br><span class="line">observable.addObserver(first);</span><br><span class="line">observable.notifyObservers(<span class="string">"42"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//    after some time, cancel observer to dispose resource</span></span><br><span class="line">observable.deleteObserver(first);</span><br></pre></td></tr></table></figure>
+<p>MonoCreate的转化示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Mono&lt;Object&gt; observableMono = Mono.create(sink -&gt; &#123;</span><br><span class="line">    Observer first = (ob, value) -&gt; &#123;</span><br><span class="line">        sink.success(value);</span><br><span class="line">    &#125;;</span><br><span class="line">    observable.addObserver(first);</span><br><span class="line">    observable.notifyObservers(<span class="string">"42"</span>);</span><br><span class="line">    sink.onDispose(() -&gt; observable.deleteObserver(first));</span><br><span class="line">&#125;);</span><br><span class="line">observableMono.subscribe(v -&gt; System.out.println(<span class="string">"value is "</span> + v));</span><br></pre></td></tr></table></figure>
+
+<h2 id="Callback-gt-MonoCreate"><a href="#Callback-gt-MonoCreate" class="headerlink" title="Callback -&gt; MonoCreate"></a>Callback -&gt; MonoCreate</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//callback example</span></span><br><span class="line">FutureCallback&lt;HttpResponse&gt; callback = <span class="keyword">new</span> FutureCallback&lt;HttpResponse&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">completed</span><span class="params">(HttpResponse result)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Response: "</span> + result.getStatusLine());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">failed</span><span class="params">(Exception ex)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Fail in "</span> + ex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancelled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Cancelled"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();</span><br><span class="line">httpclient.start();</span><br><span class="line"></span><br><span class="line">HttpGet request = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.example.com/"</span>);</span><br><span class="line">httpclient.execute(request, callback);</span><br></pre></td></tr></table></figure>
+<p>MonoCreate的转化示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">CloseableHttpAsyncClient httpclient = HttpAsyncClients.createDefault();</span><br><span class="line">httpclient.start();</span><br><span class="line"></span><br><span class="line">Mono&lt;HttpResponse&gt; responseMono = Mono.create(monoSink -&gt; &#123;</span><br><span class="line">    <span class="comment">//创建response callback的处理类，并传入monoSink供使用</span></span><br><span class="line">    CallbackHandler callbackHandler = <span class="keyword">new</span> CallbackHandler(monoSink);</span><br><span class="line">    HttpGet getRequest = <span class="keyword">new</span> HttpGet(<span class="string">"http://www.example.com/"</span>);</span><br><span class="line">    httpclient.execute(getRequest, callbackHandler.getResponseCallback());</span><br><span class="line">&#125;);</span><br><span class="line">responseMono.subscribe(response -&gt; System.out.println(<span class="string">"Response: "</span> + response.getStatusLine()));</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CallbackHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> MonoSink monoSink;</span><br><span class="line">    <span class="keyword">private</span> FutureCallback&lt;HttpResponse&gt; responseCallback;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CallbackHandler</span><span class="params">(MonoSink monoSink)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.monoSink = monoSink;</span><br><span class="line">        responseCallback = <span class="keyword">new</span> FutureCallback&lt;HttpResponse&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">completed</span><span class="params">(HttpResponse result)</span> </span>&#123;</span><br><span class="line">                monoSink.success(result);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">failed</span><span class="params">(Exception ex)</span> </span>&#123;</span><br><span class="line">                monoSink.error(ex);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancelled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                monoSink.onDispose(() -&gt; System.out.println(<span class="string">"cancelled"</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="MonoSink"><a href="#MonoSink" class="headerlink" title="MonoSink"></a>MonoSink</h1><p>从前面已经可以看到，将传统代码转变为Reactive方式的关键是在于sink，在创建Mono/FluxCreate的时候，Mono/Flux都会提供相应的sink给使用方来使用。MonoSink相比FluxSink要简单的多，为了简单起见，我们先从MonoSink来了解sink的运行原理（FluxSink会专门另开一篇来说明）。下面就来探探Mono下的MonoSink究竟到底是什么。</p>
+<p>再深入MonoSink之前，我们先来看看MonoCreate是怎么使用MonoSink的，对于Reactor来说，所有的入口都是<code>subscribe</code>方法，所以先来看看MonoCreate的subscribe方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">subscribe</span><span class="params">(CoreSubscriber&lt;? <span class="keyword">super</span> T&gt; actual)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1. 创建MonoSink实例，供MonoCreate来使用</span></span><br><span class="line">    <span class="comment">//如变量名字emitter一样，MonoSink的作用其实就是信号的发射器（signal emitter）</span></span><br><span class="line">    DefaultMonoSink&lt;T&gt; emitter = <span class="keyword">new</span> DefaultMonoSink&lt;&gt;(actual);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2. emitter除了是sink外，也实现了subscription，供Subscriber使用</span></span><br><span class="line">    <span class="comment">//这一步，调用Subscriber的onSubscribe方法，其内部则会调用subscription的request方法 （后续会重点说DefaultMonoSink的request方法）</span></span><br><span class="line">    actual.onSubscribe(emitter);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//3. callback就是在Mono.create时候传入的Mono构造器</span></span><br><span class="line">        <span class="comment">//此步骤即调用Mono构造器函数，并将sink传入</span></span><br><span class="line">        callback.accept(emitter);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Throwable ex) &#123;</span><br><span class="line">        emitter.error(Operators.onOperatorError(ex, actual.currentContext()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面的源代码可以看出，整个MonoCreate订阅过程很简单，主要是分为三个步骤：</p>
+<ol>
+<li>创建DefaultMonoSink <em>(通过这一步可以看出，一个Subscriber是独占一个MonoSink的)</em></li>
+<li>实现Subscriber的onSubscribe的方法</li>
+<li>调用Mono#create的构造器函数</li>
+</ol>
+<p>以上三个步骤是从整体视角来看的，我们再进一步进入DefaultMonoSink，以它的内部视角，来看看到底作为signal emitter的MonoSink做了些什么。</p>
+<h2 id="MonoSink-内部状态"><a href="#MonoSink-内部状态" class="headerlink" title="MonoSink 内部状态"></a>MonoSink 内部状态</h2><p>MonoSink内部主要有4个状态:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> state; <span class="comment">//初始默认状态0，即未调用Request且未赋值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NO_REQUEST_HAS_VALUE  = <span class="number">1</span>; <span class="comment">//未调用Request但已经赋值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HAS_REQUEST_NO_VALUE  = <span class="number">2</span>; <span class="comment">//调用了Request但还未赋值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> HAS_REQUEST_HAS_VALUE = <span class="number">3</span>; <span class="comment">//调用了Request且已经赋值了</span></span><br></pre></td></tr></table></figure>
+<p>这三个状态主要取决于request和success(或者error)的调用时机，调用了request方法则会是<code>HAS_REQUEST</code>，调用了success(或者error)方法则会是<code>HAS_VALUE</code>，其中request方法调用是由Subscriber#onSubscribe调用的，success或者error则是由具体使用者来调用的，如Callback。由于success或者error调用时机往往不可能确定（通常是异步的），所以才产生了上述4种状态。</p>
+<p>以同步的角度思考，通常是先调用request然后再调用success或者error方法，其中success会对应调用Subscriber的onNext与onComplete方法，error方法则会调用对应的Subscriber#onError方法。但事情往往没这么简单，就如前面提到的，request方法与success/error方法是乱序的，很有可能在request的时候，success/error方法已经调用结束了。为了解决这个问题，每个方法都引入了for-loop加CAS的多线程操作，变得相对复杂了，但只要知道其内部原理，再复杂的代码看起来就都有线索了，下面以request方法为例，来讲讲是MonoSink是如何解决多线程问题的。</p>
+<h2 id="MonoSink-request方法解释"><a href="#MonoSink-request方法解释" class="headerlink" title="MonoSink request方法解释"></a>MonoSink request方法解释</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">(<span class="keyword">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Operators.validate(n)) &#123;</span><br><span class="line">        LongConsumer consumer = requestConsumer;</span><br><span class="line">        <span class="comment">//1. 如果传入了requestConsumer，则调用</span></span><br><span class="line">        <span class="comment">//requestConsumer是通过onRequest方法传入的</span></span><br><span class="line">        <span class="keyword">if</span> (consumer != <span class="keyword">null</span>) &#123;</span><br><span class="line">            consumer.accept(n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//2. 进入for loop来实现自旋</span></span><br><span class="line">        <span class="keyword">for</span> (; ; ) &#123;</span><br><span class="line">            <span class="keyword">int</span> s = state;</span><br><span class="line">            <span class="comment">//2.1 HAS_Request: 已经调用过了，直接退出</span></span><br><span class="line">            <span class="keyword">if</span> (s == HAS_REQUEST_NO_VALUE || s == HAS_REQUEST_HAS_VALUE) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (s == NO_REQUEST_HAS_VALUE) &#123;</span><br><span class="line">                <span class="comment">// 2.2 double check 是否已经有值</span></span><br><span class="line">                <span class="comment">// 如果是，执行onNext/onComplete方法，并设置完成状态: HAS_REQUEST_HAS_VALUE</span></span><br><span class="line">                <span class="comment">// 如果不是，double check失败，直接退出，说明有别的线程已经执行了该方法了</span></span><br><span class="line">                <span class="keyword">if</span> (STATE.compareAndSet(<span class="keyword">this</span>, s, HAS_REQUEST_HAS_VALUE)) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        actual.onNext(value);</span><br><span class="line">                        actual.onComplete();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">finally</span> &#123;</span><br><span class="line">                        <span class="comment">//释放资源 - 具体调用的disposable对象由onDisposable方法赋值</span></span><br><span class="line">                        disposeResource(<span class="keyword">false</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//2.3 正常流程，值没有被赋值，设置为HAS_REQUEST_NO_VALUE</span></span><br><span class="line">            <span class="keyword">if</span> (STATE.compareAndSet(<span class="keyword">this</span>, s, HAS_REQUEST_NO_VALUE)) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MonoSink回调方法"><a href="#MonoSink回调方法" class="headerlink" title="MonoSink回调方法"></a>MonoSink回调方法</h2><p>MonoSink除了request、success、error方法外，还提供了几个回调函数，以供使用者使用，主要有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//request的时候会被调用，获取request的数量N</span></span><br><span class="line"><span class="function">MonoSink&lt;T&gt; <span class="title">onRequest</span><span class="params">(LongConsumer consumer)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Subscriber调用subscription.cancel是会调用该Disposable方法</span></span><br><span class="line"><span class="function">MonoSink&lt;T&gt; <span class="title">onCancel</span><span class="params">(Disposable d)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//与onCancel类似，区别是，除了onCancel方法，在onComplete以及onError也会调用该Disposable方法</span></span><br><span class="line"><span class="function">MonoSink&lt;T&gt; <span class="title">onDispose</span><span class="params">(Disposable d)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这里简单讲一下Reactor的代码命名规范，对于回调函数都是以onXXX方式命名，注意调用该onXXX方式的时候，<strong>并不是直接调用，而只是传入该回调方法，待对应的事件信号发生时，才会真的被调用</strong>。这也是声明式编程的一个特色，先声明再执行。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文首先描述了传统命令式的代码如何转换为Reactive方式的代码，然后就其内部MonoSink就行了深入的了解，重点讲解了其实现形式，通过对MonoSink的剖析，能够更具体的对Mono整体的使用方式的了解。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2019/12/29/dig-and-dns-record-type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/29/dig-and-dns-record-type/" class="post-title-link" itemprop="url">dig与记录类型举例</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-29 23:09:02" itemprop="dateCreated datePublished" datetime="2019-12-29T23:09:02+08:00">2019-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-30 00:13:16" itemprop="dateModified" datetime="2019-12-30T00:13:16+08:00">2019-12-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/DNS/" itemprop="url" rel="index">
+                    <span itemprop="name">DNS</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本文介绍dig的常规使用，以及以<code>iqiyi.com</code>域名为例的dns记录类型举例。之所以用<code>iqiyi.com</code>为例，是因为本人在此公司任职:)。DNS记录类型介绍可以查看<a href="/2019/12/29/dns-data-type-md/" title="DNS记录类型">DNS记录类型</a>。</p>
+<h1 id="dig命令"><a href="#dig命令" class="headerlink" title="dig命令"></a>dig命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig [type] [@resolver-server] [+short] [+trace] target</span><br></pre></td></tr></table></figure>
+<ul>
+<li>type指定记录类型如A、NS、MX等，具体可参考我之前的文章。默认查询为A记录。</li>
+<li>@resolver-server指定域名解析的本地服务器，默认是网关，但也可以手动指定，如8.8.8.8google的通用域名解析器。</li>
+<li>+short 简化应答形式，只显示ip结果</li>
+<li>+trace 显示整个域名解析的迭代过程，从根域名到顶级域名到次级域名直到主机域名。</li>
+</ul>
+<h1 id="dig举例"><a href="#dig举例" class="headerlink" title="dig举例"></a>dig举例</h1><h2 id="dig查询"><a href="#dig查询" class="headerlink" title="dig查询"></a>dig查询</h2><p>执行命令：<code>dig iqiyi.com</code>，得到结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一段</span><br><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com </span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 6831</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第二段</span><br><span class="line">;; QUESTION SECTION:  </span><br><span class="line">;iqiyi.com.			IN	A</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第三段</span><br><span class="line">;; ANSWER SECTION:    </span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.172</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.170</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.174</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.176</span><br><span class="line">iqiyi.com.		350	IN	A	101.227.188.178</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第四段</span><br><span class="line">;; Query time: 7 msec  </span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 17:45:11 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 107</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结果说明<ul>
+<li>第一段 是查询命令说明以及结果统计信息展示</li>
+<li>第二段 查询内容</li>
+<li>第三段 查询结果内容，iqiyi.com的A记录有4个，350TTL（表明缓存时间是350s）。</li>
+<li>第四段 DNS服务器信息，192.168.3.1#53是本地DNS服务器192.168.3.1（家里的网关ip），53是端口号，DNS服务的默认端口。107是收到结果的大小107个字节。</li>
+</ul>
+</li>
+</ul>
+<h2 id="dig-short-简单查询"><a href="#dig-short-简单查询" class="headerlink" title="dig +short 简单查询"></a>dig +short 简单查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">101.227.188.170</span><br><span class="line">101.227.188.174</span><br><span class="line">101.227.188.172</span><br><span class="line">101.227.188.176</span><br><span class="line">101.227.188.178</span><br></pre></td></tr></table></figure>
+<p>只返回查询结果的ip地址。</p>
+<h2 id="dig分级查询"><a href="#dig分级查询" class="headerlink" title="dig分级查询"></a>dig分级查询</h2><p>执行命令:<code>dig iqiyi.com +trace</code>,得到结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com +trace</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Received 28 bytes from 192.168.3.1#53(192.168.3.1) in 3 ms</span><br></pre></td></tr></table></figure>
+<p>发现什么都没有返回，应该是本地服务器192.168.3.1网关不支持trace的查询。</p>
+<p>所以改用8.8.8.8服务器来查询，命令：<code>dig iqiyi.com +trace @8.8.8.8</code>,结果如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com +trace @8.8.8.8</span><br><span class="line">;; global options: +cmd</span><br><span class="line">&#x2F;&#x2F;首次查询 根域名服务器查询 （查询本地服务器）</span><br><span class="line">.			51069	IN	NS	f.root-servers.net.</span><br><span class="line">.			51069	IN	NS	h.root-servers.net.</span><br><span class="line">.			51069	IN	NS	e.root-servers.net.</span><br><span class="line">.			51069	IN	NS	l.root-servers.net.</span><br><span class="line">.			51069	IN	NS	c.root-servers.net.</span><br><span class="line">.			51069	IN	NS	b.root-servers.net.</span><br><span class="line">.			51069	IN	NS	m.root-servers.net.</span><br><span class="line">.			51069	IN	NS	a.root-servers.net.</span><br><span class="line">.			51069	IN	NS	d.root-servers.net.</span><br><span class="line">.			51069	IN	NS	i.root-servers.net.</span><br><span class="line">.			51069	IN	NS	k.root-servers.net.</span><br><span class="line">.			51069	IN	NS	j.root-servers.net.</span><br><span class="line">.			51069	IN	NS	g.root-servers.net.</span><br><span class="line">.			51069	IN	RRSIG	NS 8 0 518400 20200110170000 20191228160000 22545 . O+lE7aOii9IvLdYuWpMrTY0RkPpbc0yJLAhg&#x2F;pwdxh8qZiACwS4TxuYo vxZrvoB0sJ7RyDgycViUEt++avEWx1JjzluiOXj1R0jqZQ7EXO+L+acP o88jV9F3Hqeuudj4u3ZZvM55eLnWfJaJzap&#x2F;H3xi87rt5obw3zMd5QZE M2zQXSnrCiI2rSelaTeeHx6Mu+8yVigaAwRAH&#x2F;8QdiAs2y2VuLbdl+C7 mHrbc3blraXSC6dzlGAEmryReOS5WOaMkSJZBctFbnX8KMmSdd83zBOv CVtdkPKGCwtUTWbbNZqrndYGqfCHf8NVLugz5R+jY3uzMvaQvdXBKwFT dcImog&#x3D;&#x3D;</span><br><span class="line">;; Received 525 bytes from 8.8.8.8#53(8.8.8.8) in 41 ms</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第一次迭代 顶级域名（TLD）查询 (查询根域名服务器)</span><br><span class="line">com.			172800	IN	NS	l.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	b.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	c.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	d.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	e.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	f.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	g.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	a.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	h.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	i.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	j.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	k.gtld-servers.net.</span><br><span class="line">com.			172800	IN	NS	m.gtld-servers.net.</span><br><span class="line">com.			86400	IN	DS	30909 8 2 E2D3C916F6DEEAC73294E8268FB5885044A833FC5459588F4A9184CF C41A5766</span><br><span class="line">com.			86400	IN	RRSIG	DS 8 1 86400 20200111050000 20191229040000 22545 . YT51a7sayHoEdZByf40buEQfUYzapxyvAwfPV12AwfWRh4crg9jIVcY6 V79GO4Yb+ezclS4ZTvT+WZ9yLdwuWnzAGVTD0fd9RLvK03nk45ZK42LP MNSHwwUOjv338vqcubwqNOyjxpEukQF3TPXgKAV&#x2F;ltpGzQYmnDofCd+S uLAssjpag59wPWruFItrIvE6qD7xaDXv+oVsO&#x2F;bTp7pVb7NOi+KOCpMI D8aP4xm+624JWxLZ59YXOLOy3q1YVfLiVCe4ghtJS4&#x2F;6BIuRhQ3CAOmj w4QfJVrTDnyn&#x2F;RY3z41BnRT8K6CkUyuDc5Nc4NlU5KX3HxdiphW1w6JM oWNrPQ&#x3D;&#x3D;</span><br><span class="line">;; Received 1169 bytes from 192.203.230.10#53(e.root-servers.net) in 170 ms</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第二次迭代 次级域名查询（查询TLD）</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns1.iqiyi.com.</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns2.iqiyi.com.</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns3.iqiyi.com.</span><br><span class="line">iqiyi.com.		172800	IN	NS	ns4.iqiyi.com.</span><br><span class="line">CK0POJMG874LJREF7EFN8430QVIT8BSM.com. 86400 IN NSEC3 1 1 0 - CK0Q1GIN43N1ARRC9OSM6QPQR81H5M9A  NS SOA RRSIG DNSKEY NSEC3PARAM</span><br><span class="line">CK0POJMG874LJREF7EFN8430QVIT8BSM.com. 86400 IN RRSIG NSEC3 8 2 86400 20200102054825 20191226043825 12163 com. J8V3FpilA7JdIt7GBym3CCORYjgGlHAazZlLNBiJ0bFa92n4PrX0hPYo oUHtAA4lEaw9eSJjOIVXhnKq9AR7EgQFfMxcT8OvbBVJ4eErF1vBjd1B x4EkZM2IHIVPPv8XlziufAhiSVMnYHcZnuO8BpDaXrasvlW3U9vv&#x2F;VQU dCs79XwjQR&#x2F;XkFvJKvldj2EZd3FXLlRDdnwESxhlpLZmIg&#x3D;&#x3D;</span><br><span class="line">CDJHMJ049AHN95A56GE5FPTIT6CK3TVA.com. 86400 IN NSEC3 1 1 0 - CDJIFERNDE19197KLS7DLE5N5008MQB2  NS DS RRSIG</span><br><span class="line">CDJHMJ049AHN95A56GE5FPTIT6CK3TVA.com. 86400 IN RRSIG NSEC3 8 2 86400 20200103053214 20191227042214 12163 com. LQOPbhYOUqtzkl49A0Sg7IVpJ8HVep5FwE5ILJ0cK&#x2F;5uGsvKk1bbrM4A s0M5iiaVnQ0BwTt9FRNdYRGUVUL6YSJATaouDomYj3o&#x2F;h+0kGxvrJxnF jRuDsQS56c6LDALzd+2Hv4xwiOURhv0Nl4v3rycokglC6IjN1VpGrgWN bldR9ixluPAQsBo+m3TdieQyb4zc10Ks3BAJg4UKmNQSLg&#x3D;&#x3D;</span><br><span class="line">;; Received 723 bytes from 192.26.92.30#53(c.gtld-servers.net) in 171 ms</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;第三次迭代  主机域名查询 （查询权威域名服务器）</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.172</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.174</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.176</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.178</span><br><span class="line">iqiyi.com.		600	IN	A	101.227.188.170</span><br><span class="line">;; Received 118 bytes from 43.225.84.1#53(ns3.iqiyi.com) in 28 ms</span><br></pre></td></tr></table></figure>
+<p>根据每次迭代返回结果的服务器信息，我们可以发现DNS查询整体流程是这样的：</p>
+<img src="/2019/12/29/dig-and-dns-record-type/DNS_Query_Flow.png" class="" title="This is an image">
+
+<ul>
+<li>首次查询 从本地服务器（local dns server）获取根域名服务器地址，然后由<strong>本地服务器</strong>开始迭代dns查询过程。</li>
+<li>第一次迭代 由本地服务器访问根域名服务器，根域名服务器返回关于顶级域名<code>.com</code>的NS记录。</li>
+<li>第二次迭代 由本地服务器访问上一步获得的<code>.com</code>地址的顶级域名服务器，并从中获得关于<code>iqiyi.com</code>的NS记录。</li>
+<li>第三次迭代 由本地服务器访问由上一步获得的<code>iqiyi.com</code>NS的服务器地址，即<code>iqiyi.com</code>的权威服务器，然后获得iqiyi.com的A记录。</li>
+<li>最终，本地服务器返回关于<code>iqiyi.com</code>的IP地址给客户端，然后客户端再访问目标服务器。</li>
+</ul>
+<h1 id="记录类型举例"><a href="#记录类型举例" class="headerlink" title="记录类型举例"></a>记录类型举例</h1><ol>
+<li>SOA记录 <code>dig iqiyi.com soa</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com soa</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 20850</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="line"></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: 0, flags:; udp: 4096</span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	SOA</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		86400	IN	SOA	ns1.iqiyi.com. dnsadmin.iqiyi.com. 2019122905 1800 600 1209600 600</span><br><span class="line"></span><br><span class="line">;; Query time: 33 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:46:03 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 87</span><br></pre></td></tr></table></figure></li>
+<li>NS记录 <code>dig iqiyi.com ns</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com ns</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 21342</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="line"></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: 0, flags:; udp: 4096</span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	NS</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns2.iqiyi.com.</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns3.iqiyi.com.</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns4.iqiyi.com.</span><br><span class="line">iqiyi.com.		1132	IN	NS	ns1.iqiyi.com.</span><br><span class="line"></span><br><span class="line">;; Query time: 11 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:47:10 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 110</span><br></pre></td></tr></table></figure></li>
+<li>ns3.iqiyi.com的A记录 <code>dig ns3.iqiyi.com</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; ns3.iqiyi.com</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 11375</span><br><span class="line">;; flags: qr rd ra ad; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="line"></span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;ns3.iqiyi.com.			IN	A</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">ns3.iqiyi.com.		296	IN	A	43.225.84.1</span><br><span class="line"></span><br><span class="line">;; Query time: 51 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:49:07 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 47</span><br></pre></td></tr></table></figure></li>
+<li>MX记录 <code>dig iqiyi.com mx</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com mx</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 16303</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0</span><br><span class="line"></span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	MX</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		300	IN	MX	10 mx1.iqiyi.com.</span><br><span class="line"></span><br><span class="line">;; Query time: 9 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:50:26 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 47</span><br></pre></td></tr></table></figure></li>
+<li>TXT记录 <code>dig iqiyi.com txt</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; iqiyi.com txt</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 28756</span><br><span class="line">;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1</span><br><span class="line"></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: 0, flags:; udp: 4096</span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;iqiyi.com.			IN	TXT</span><br><span class="line"></span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">iqiyi.com.		600	IN	TXT	&quot;92qpmvb8qgzqbvndvbgtrn9nlys14bxh&quot;</span><br><span class="line">iqiyi.com.		600	IN	TXT	&quot;v&#x3D;spf1 ip4:202.108.14.100 a mx ~all&quot;</span><br><span class="line"></span><br><span class="line">;; Query time: 64 msec</span><br><span class="line">;; SERVER: 192.168.3.1#53(192.168.3.1)</span><br><span class="line">;; WHEN: Sun Dec 29 22:51:45 CST 2019</span><br><span class="line">;; MSG SIZE  rcvd: 131</span><br></pre></td></tr></table></figure></li>
+<li>SRV、PTR<br>SRV与PRT不常用，所以iqiyi.com的域名服务器并没有配置这两项。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.ruanyifeng.com/blog/2016/06/dns.html" target="_blank" rel="noopener">DNS 原理入门</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2019/12/29/dns-data-type-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/29/dns-data-type-md/" class="post-title-link" itemprop="url">DNS数据与类型</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-29 23:08:30 / 修改时间：23:10:44" itemprop="dateCreated datePublished" datetime="2019-12-29T23:08:30+08:00">2019-12-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/DNS/" itemprop="url" rel="index">
+                    <span itemprop="name">DNS</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>DNS是WWW万维网中重要的一环，内部涉及到多种数据类型，dns的数据称为记录（record），平时我们涉及到最多的可能只有IP解析服务的A记录，但深入了解下去，发现DNS有多种用于不同用途的数据类型，常见的主要有：</p>
+<ul>
+<li>A (Host address)</li>
+<li>AAAA (IPv6 host address)</li>
+<li>CNAME (Canonical name for an alias)</li>
+<li>MX (Mail eXchange)</li>
+<li>NS (Name Server)</li>
+<li>PTR (Pointer)</li>
+<li>SOA (Start Of Authority)</li>
+<li>SRV (location of service)</li>
+<li>TXT (Descriptive text)</li>
+</ul>
+<p>更多的记录类型可以参考：<a href="https://simpledns.plus/help/dns-record-types" target="_blank" rel="noopener">https://simpledns.plus/help/dns-record-types</a></p>
+<h1 id="Zone文件"><a href="#Zone文件" class="headerlink" title="Zone文件"></a>Zone文件</h1><p>要想清楚明白记录类型，就不得不去深入了解Zone文件。DNS服务器是采用Zone文件来进行数据管理的，每个Zone相当于一个独立的管理单元，一个DNS可以管理多个zone文件，一个zone文件也可以被多个单独的dns服务器管理（如主、从、缓存服务器）。</p>
+<h2 id="zone文件结构"><a href="#zone文件结构" class="headerlink" title="zone文件结构"></a>zone文件结构</h2><p>一个域名对应着一个zong文件，以abc.com为例，zone文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$TTL 6h &#x2F;&#x2F;第1行</span><br><span class="line">$ORIGIN abc.com. &#x2F;&#x2F;第2行</span><br><span class="line">@ 3600 IN SOA ns1.ddd.com. root.ddd.com.( &#x2F;&#x2F;第3行</span><br><span class="line">    929142851 ; Serial &#x2F;&#x2F;第4行</span><br><span class="line">    1800 ; Refresh &#x2F;&#x2F;第5行</span><br><span class="line">    600 ; Retry &#x2F;&#x2F;第6行</span><br><span class="line">    2w ; Expire &#x2F;&#x2F;第7行</span><br><span class="line">    300 ; Minimum &#x2F;&#x2F;第8行</span><br><span class="line">    ) </span><br><span class="line">@ 2d IN NS ns1.ddd.com. &#x2F;&#x2F;第9行</span><br><span class="line">@ 2d IN NS ns2.ddd.com. &#x2F;&#x2F;第10行</span><br><span class="line">@ 2d IN NS ns3.ddd.com. &#x2F;&#x2F;第11行</span><br><span class="line">ns1 3600 IN A 120.172.234.27 &#x2F;&#x2F;第12行</span><br><span class="line">ns2 3600 IN A 120.172.234.28 &#x2F;&#x2F;第13行</span><br><span class="line">ns3 3600 IN A 120.172.234.29 &#x2F;&#x2F;第14行</span><br><span class="line">a 3600 IN A 120.172.234.27 &#x2F;&#x2F;第15行</span><br><span class="line">b 3600 IN CNAME a.abc.com. &#x2F;&#x2F;第16行</span><br><span class="line">@ 3600 IN MX a.abc.com. &#x2F;&#x2F;第17行</span><br><span class="line">@ 3600 IN TXT &quot;TXT&quot; &#x2F;&#x2F;第18行</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件解释"><a href="#文件解释" class="headerlink" title="文件解释"></a>文件解释</h2><ul>
+<li>第1行，这行内容给出了该域名(<code>abc.com.</code>)各种记录的默认TTL值，这里为6小时。即如果该域名的记录没有特别定义TTL，则默认TTL为有效值。</li>
+<li>第2行，这行内容标识出该ZONE文件是隶属那个域名的，这里为<code>abc.com.</code>。</li>
+<li>第3行，从这行开始到第8行为该域名的SOA记录部分，这里的@代表域名本身。ns1.ddd.com表示该域名的主权威DNS。root.ddd.com表示该主权威DNS管理员邮箱，等价于<a href="mailto:root@ddd.com">root@ddd.com</a>。</li>
+<li>第4行，Serial部分，这部分用来标记ZONE文件更新，如果发生更新则Serial要单增，否则MASTER不会通知SLAVE进行更新。</li>
+<li>第5行，Refresh部分，这个标记SLAVE服务器多长时间主动(忽略MASTER的更新通知)向MASTER复核Serial是否有变，如有变则更新之。</li>
+<li>第6行，Retry部分，如Refresh过程不能完成，重试的时间间隔。</li>
+<li>第7行，Expire部分，如SLAVE无法与MASTER取得联系，SLAVE继续提供DNS服务的时间，这里为2W(两周时间)。Expire时间到期后SLAVE仍然无法联系MASTER则停止工作，拒绝继续提供服务。Expire的实际意义在于它决定了MASTER服务器的最长下线时间(如MASTER迁移，DOWN机等)。</li>
+<li>第8行，Minimum部分，这个部分定义了DNS对否定回答(NXDOMAIN即访问的记录在权威DNS上不存在)的缓存时间。</li>
+<li>第9-11行，定义了该域名的3个权威DNS服务器。NS记录表明要想知道该域名的ip解析，就要向该地址的服务器请求访问，这里的域名是<code>abc.com.</code>，@表示本域名。那NS服务的具体地址是什么呢，由对应的ns域名的A记录来指定，如第12-14行。通常NS记录的TTL大些为宜，这里为2天。设置过小只会增加服务器无谓的负担，同时解析稳定性会受影响。</li>
+<li>第15-18行是常用的几个记录类型，详细请参考下一节。</li>
+</ul>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><h2 id="SOA记录"><a href="#SOA记录" class="headerlink" title="SOA记录"></a>SOA记录</h2><p>一个zone文件的第一个记录（Start Of Authority），记录了整个zone文件（权威域）的全局配置，如主域名、管理员邮箱、重试时间、刷新时间等等。</p>
+<h2 id="A、AAAA记录"><a href="#A、AAAA记录" class="headerlink" title="A、AAAA记录"></a>A、AAAA记录</h2><p>DNS中最常用的记录类型，用于IP解析功能，A记录用于IPv4的解析，AAAA用于IPv6的解析。</p>
+<h2 id="NS记录"><a href="#NS记录" class="headerlink" title="NS记录"></a>NS记录</h2><p>NS（NameServer）域名服务记录，是除A记录外必需的记录，用于记录指定域名的服务器解析地址。</p>
+<h2 id="CNAME记录"><a href="#CNAME记录" class="headerlink" title="CNAME记录"></a>CNAME记录</h2><p>CNAME相关于别名功能，对于多个不同的域名，采用同一个CNAME来方便配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">www IN CNAME name.abc.com.</span><br><span class="line">web IN CNAME name.abc.com.</span><br><span class="line">home IN CNAME name.abc.com.</span><br><span class="line">name IN A 110.10.1.2</span><br></pre></td></tr></table></figure>
+<p>例如三个不同的域名<a href="http://www.abc.com、web.abc.com、home.abc.com可以用同一个CNAME" target="_blank" rel="noopener">www.abc.com、web.abc.com、home.abc.com可以用同一个CNAME</a> name.abc.com来表示，方便配置与修改。</p>
+<h2 id="MX记录"><a href="#MX记录" class="headerlink" title="MX记录"></a>MX记录</h2><p>MX（Mail Exchange）邮箱服务器地址，用于记录邮件地址对应的服务器地址，如<a href="mailto:mailname@abc.com">mailname@abc.com</a>的邮箱地址，邮件系统会根据abc.com域名的MX记录来找到指定的邮箱服务器地址。</p>
+<h2 id="PTR"><a href="#PTR" class="headerlink" title="PTR"></a>PTR</h2><p>PTR记录可以理解为是A记录的反解，A记录是根据域名来获取ip地址，而PTR记录则是根据ip可以反向查出ip地址对应的域名，例如给定的ip属于<a href="http://www.abc.com。" target="_blank" rel="noopener">www.abc.com。</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">; 50 是 10.0.1.50  4个数字中的最后一个</span><br><span class="line">; www.abc.com 必须是 FQDN</span><br><span class="line"></span><br><span class="line">50 IN PTR www.abc.com.</span><br></pre></td></tr></table></figure>
+
+<h2 id="SRV"><a href="#SRV" class="headerlink" title="SRV"></a>SRV</h2><p>DNS SRV是DNS记录中一种，用来指定服务地址。与常见的A记录、cname不同的是，SRV中除了记录服务器的地址，还记录了服务的端口，并且可以设置每个服务地址的优先级和权重。访问服务的时候，本地的DNS resolver从DNS服务器查询到一个地址列表，根据优先级和权重，从中选取一个地址作为本次请求的目标地址。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">_ldap._tcp.example.com TTL Class SRV Priority Weight Port Target</span><br><span class="line">Service: 服务名称，前缀“_”是为防止与DNS Label（普通域名）冲突。</span><br><span class="line">Proto:   服务使用的通信协议，_TCP、_UDP、其它标准协议或者自定义的协议。</span><br><span class="line">Name:    提供服务的域名。</span><br><span class="line">TTL:     缓存有效时间。</span><br><span class="line">CLASS:   类别</span><br><span class="line">Priority: 该记录的优先级，数值越小表示优先级越高，范围0-65535。</span><br><span class="line">Weight:   该记录的权重，数值越高权重越高，范围0-65535。     </span><br><span class="line">Port:     服务端口号，0-65535。</span><br><span class="line">Target:   host地址。</span><br></pre></td></tr></table></figure>
+<p>一个能够支持SRV的LDAP client可以通过查询域名，得知LDAP服务的IP地址和服务端口。</p>
+<h2 id="TXT"><a href="#TXT" class="headerlink" title="TXT"></a>TXT</h2><p>TXT记录用于DNS一些扩展功能，最多可记录65536个字节。通常主要用于域名拥有权验证（如google-site-verification)，SPF反垃圾邮箱验证等等。后续会对TXT记录做详细的介绍。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://www.jianshu.com/p/073c4f407395" target="_blank" rel="noopener">Red Hat – DNS [Zone 文件]</a></li>
+<li><a href="https://www.cnblogs.com/niuchunjian/p/3485724.html" target="_blank" rel="noopener">DNS扫盲系列之五：域名配置ZONE文件</a></li>
+<li><a href="https://www.lijiaocn.com/%E6%8A%80%E5%B7%A7/2017/03/06/dns-srv.html" target="_blank" rel="noopener">SRV记录</a></li>
+<li><a href="https://simpledns.plus/help/dns-record-types" target="_blank" rel="noopener">https://simpledns.plus/help/dns-record-types</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2019/12/20/Java_Nio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/20/Java_Nio/" class="post-title-link" itemprop="url">Nio系列之Java Nio</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-20 11:33:32" itemprop="dateCreated datePublished" datetime="2019-12-20T11:33:32+08:00">2019-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-29 23:25:39" itemprop="dateModified" datetime="2019-12-29T23:25:39+08:00">2019-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/Nio/" itemprop="url" rel="index">
+                    <span itemprop="name">Nio</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基础概念介绍"><a href="#基础概念介绍" class="headerlink" title="基础概念介绍"></a>基础概念介绍</h1><h2 id="1-一个简单服务器的基本流程"><a href="#1-一个简单服务器的基本流程" class="headerlink" title="1. 一个简单服务器的基本流程"></a>1. 一个简单服务器的基本流程</h2><pre class="mermaid">graph TB
+C --建立--> D
+C --建立--> D1
+subgraph Socket生命周期
+D1(收到客户端连接完成) --> E1(生成普通Socket资源)
+E1 --> F1
+F1(Socket读写) --while loop --> F1
+F1 --> G1((关闭))
+end
+subgraph Socket生命周期
+D(收到客户端连接完成) --> E(生成普通Socket资源)
+E --> F
+F(Socket读写) --while loop --> F
+F --> G((关闭))
+end
+subgraph 创建Server Socket
+A(创建服务Socket资源) --> B(绑定服务端口)
+B --> C(开始监听Accept)
+end</pre>
+
+<h2 id="2-一切皆资源"><a href="#2-一切皆资源" class="headerlink" title="2. 一切皆资源"></a>2. 一切皆资源</h2><p>在Linux世界里，所有的资源都用描述符来表示，且对于IO资源都虚拟化为了文件，所以IO的描述符都叫文件描述即fd (file descriptor)。</p>
+<p>在简单服务器里，主要有两类资源，即服务端Server Socket以及普通连接Socket。</p>
+<ul>
+<li>ServerSocket负责服务端口监听，当有请求进来时建立与客户端通信的socket连接。</li>
+<li>普通Socket负责与客户端的读写通信。</li>
+</ul>
+<p>例如Http是80端口，服务前监听80端口，然后每接收到一个请求，则建立一个普通的Socket。建立完Socket后，此后与客户端通信都只与这个socket有关，与ServerSocket无关了。</p>
+<h2 id="3-Bio-v-s-Nio"><a href="#3-Bio-v-s-Nio" class="headerlink" title="3. Bio v.s. Nio"></a>3. Bio v.s. Nio</h2><p>Bio: 顾名思义，在等待资源ready的时候都会阻塞，例如accept以及read和write。操作系统默认行为就是阻塞的，此时如果资源没有准备好，就会阻塞当前线程。</p>
+<p>由于IO会阻塞线程，所以对于BIO而言，就会有one connection per thread模型，即一个连接(connection)需要配一个线程。这种模式在大量连接时会存在缺陷，例如有一万个用户连接，就需要创建一万个线程，而线程也是要耗不少资源的，假如一个线程占内存512K，则一万个线程需要5G内存，所以导致难以支持一万个连接，更多细节请查看C10K问题。 （一个衍生：创建一个线程需要多少资源）</p>
+<p>为了解决C10K问题，为此引入了nio。顾名思义，nio是指IO不会阻塞，但nio重点并不是为了非阻塞，为的是<strong>通过非阻塞进而引入的线程模型的变化，即可以通过利用一个线程来管理多个连接（Connection）资源，即multiple connection per thread模型</strong>。</p>
+<h1 id="Java-Nio"><a href="#Java-Nio" class="headerlink" title="Java Nio"></a>Java Nio</h1><p>先以一个简单的EchoServer为例，来介绍下Java Nio涉及到的核心知识。</p>
+<h2 id="1-简单EchoServer示例"><a href="#1-简单EchoServer示例" class="headerlink" title="1. 简单EchoServer示例"></a>1. 简单EchoServer示例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.gaocher.learning.server.javanio;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.InetSocketAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SelectionKey;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.Selector;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.ServerSocketChannel;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.SocketChannel;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Isaac Gao</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Date</span> 2019/12/19</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EchoServer</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> Selector selector;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      selector = Selector.open();</span><br><span class="line"><span class="comment">//            We have to set connection host, port and non-blocking mode</span></span><br><span class="line">      ServerSocketChannel socket = ServerSocketChannel.open();</span><br><span class="line">      ServerSocket serverSocket = socket.socket();</span><br><span class="line">      serverSocket.bind(<span class="keyword">new</span> InetSocketAddress(<span class="string">"localhost"</span>, <span class="number">8089</span>));</span><br><span class="line">      socket.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line">      <span class="keyword">int</span> ops = socket.validOps();</span><br><span class="line">      SelectionKey register = socket.register(selector, ops, <span class="keyword">null</span>);</span><br><span class="line">      <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">        selector.select();</span><br><span class="line">        Set&lt;SelectionKey&gt; selectedKeys = selector.selectedKeys();</span><br><span class="line">        Iterator&lt;SelectionKey&gt; i = selectedKeys.iterator();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i.hasNext()) &#123;</span><br><span class="line">          SelectionKey key = i.next();</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (key.isAcceptable()) &#123;</span><br><span class="line"><span class="comment">//                        New client has been accepted</span></span><br><span class="line">            handleAccept(socket, key);</span><br><span class="line">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (key.isReadable()) &#123;</span><br><span class="line"><span class="comment">//                        We can run non-blocking operation READ on our client</span></span><br><span class="line">            String data = handleRead(key);</span><br><span class="line">            handleWrite( data, (SocketChannel)key.channel());</span><br><span class="line">          &#125;</span><br><span class="line">          i.remove();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handleAccept</span><span class="params">(ServerSocketChannel mySocket,</span></span></span><br><span class="line"><span class="function"><span class="params">      SelectionKey key)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"Connection Accepted..."</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Accept the connection and set non-blocking mode</span></span><br><span class="line">    SocketChannel client = mySocket.accept();</span><br><span class="line">    client.configureBlocking(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Register that client is reading this channel</span></span><br><span class="line">    client.register(selector, SelectionKey.OP_READ);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">handleRead</span><span class="params">(SelectionKey key)</span></span></span><br><span class="line"><span class="function">      <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Reading..."</span>);</span><br><span class="line">    <span class="comment">// create a ServerSocketChannel to read the request</span></span><br><span class="line">    SocketChannel client = (SocketChannel) key.channel();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create buffer to read data</span></span><br><span class="line">    ByteBuffer buffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">    client.read(buffer);</span><br><span class="line"><span class="comment">//        Parse data from buffer to String</span></span><br><span class="line">    String data = <span class="keyword">new</span> String(buffer.array()).trim();</span><br><span class="line">    <span class="keyword">if</span> (data.length() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      System.out.println(<span class="string">"Received message: "</span> + data);</span><br><span class="line">      <span class="keyword">if</span> (data.equalsIgnoreCase(<span class="string">"exit"</span>)) &#123;</span><br><span class="line">        client.close();</span><br><span class="line">        System.out.println(<span class="string">"Connection closed..."</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handleWrite</span><span class="params">(String data, SocketChannel client)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">byte</span>[] bytes = data.getBytes();</span><br><span class="line">    ByteBuffer wrap = ByteBuffer.wrap(bytes);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      client.write(wrap);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-java-nio-核心概念"><a href="#2-java-nio-核心概念" class="headerlink" title="2. java nio 核心概念"></a>2. java nio 核心概念</h2><p>为了支持nio，java提供了一套抽象模型，即Selector、Channel、Buffer，除此之外，为了方便编程，还提供了一个组合体SelectionKey。</p>
+<ul>
+<li>Selector: 对多个Connection进行管理，负责对感兴趣的事件（interested ops）进行注册监听</li>
+<li>Channel：对Socket的抽象，即代表连接，读写操作都在此进行。</li>
+<li>Buffer：读写缓冲，用户态的内存用于与内核态的数据buffer进行交换。</li>
+<li>SelectionKey：用于表示一个Selector与Channel，重点是<strong>attach的对象，可以方便的用于与Channel相关的Context存储</strong>。</li>
+</ul>
+<p>具体关系如下：<br><img src="/images/java_nio_relation.png" alt="Java Nio关系图"></p>
+<p>一个channel为什么会有多个key？一个channel可被多个selector注册监听，所以需要用数组来保存keys。</p>
+<p>除了上面几个核心概念外，还有一个，就是ops，表示要关注的IO操作。</p>
+<p>虽然在关注的事件用Ops（Operation操作）来表示，但其实<strong>应该用事件event更贴切</strong>，其实Nio就是一个<strong>基于事件的网络模型</strong>。为了简化，Java将事件总共分为四种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static final int OP_READ &#x3D; 1 &lt;&lt; 0;</span><br><span class="line"></span><br><span class="line">public static final int OP_WRITE &#x3D; 1 &lt;&lt; 2;</span><br><span class="line"></span><br><span class="line">public static final int OP_CONNECT &#x3D; 1 &lt;&lt; 3;</span><br><span class="line"></span><br><span class="line">public static final int OP_ACCEPT &#x3D; 1 &lt;&lt; 4;</span><br></pre></td></tr></table></figure>
+<p>其中serversocketChannel只有Accept，另外三个属于普通的SocketChannel，为了方便，java通过Channel.validOps()硬编码了这个知识。</p>
+<h2 id="3-基本流程"><a href="#3-基本流程" class="headerlink" title="3. 基本流程"></a>3. 基本流程</h2><ol>
+<li><p>创建相关资源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">selector &#x3D; Selector.open();</span><br><span class="line">ServerSocketChannel socket &#x3D; ServerSocketChannel.open();</span><br><span class="line">ServerSocket serverSocket &#x3D; socket.socket();</span><br><span class="line">serverSocket.bind(new InetSocketAddress(&quot;localhost&quot;, 8089));</span><br><span class="line">socket.configureBlocking(false);</span><br></pre></td></tr></table></figure></li>
+<li><p>注册channel到selector</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int ops &#x3D; socket.validOps();</span><br><span class="line">SelectionKey register &#x3D; socket.register(selector, ops, null);</span><br></pre></td></tr></table></figure></li>
+<li><p>开启循环监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while(true) &#123;</span><br><span class="line">    selector.select(); &#x2F;&#x2F;若无事件产生，则阻塞</span><br><span class="line">    Set&lt;SelectionKey&gt; selectedKeys &#x3D; selector.selectedKeys(); &#x2F;&#x2F;获取已经ready的SelectionKey</span><br><span class="line">    &#x2F;&#x2F;... 进行读写、关闭等操作</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>处理事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SelectionKey key &#x3D; i.next();</span><br><span class="line"></span><br><span class="line">if (key.isAcceptable()) &#123;</span><br><span class="line">  &#x2F;&#x2F; New client has been accepted</span><br><span class="line">  handleAccept(socket, key);</span><br><span class="line">&#125; else if (key.isReadable()) &#123;</span><br><span class="line">  &#x2F;&#x2F; We can run non-blocking operation READ on our client</span><br><span class="line">  String data &#x3D; handleRead(key);</span><br><span class="line">  handleWrite( data, (SocketChannel)key.channel());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，这里写数据的时候并没有使用Nio，而是直接调用channel.write（Bio的方式）的方式来实现，因为写数据往往都是ready的，除非是缓冲区已满无法写入。所以对于写操作而言，用Bio方式更快一些。</p>
+</li>
+<li><p>删除事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;SelectionKey&gt; i &#x3D; selectedKeys.iterator();</span><br><span class="line">&#x2F;&#x2F;...</span><br><span class="line">i.remove();</span><br></pre></td></tr></table></figure>
+<p>Selector不会对selectedKeys做删除，当有事件触发后，则key会一直存在，所以需要手动删除。</p>
+</li>
+</ol>
+<h2 id="4-doSelect源码"><a href="#4-doSelect源码" class="headerlink" title="4. doSelect源码"></a>4. doSelect源码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">doSelect</span><span class="params">(<span class="keyword">long</span> timeout)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (closed)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ClosedSelectorException();</span><br><span class="line">    processDeregisterQueue();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        begin();</span><br><span class="line">        pollWrapper.poll(timeout);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        end();</span><br><span class="line">    &#125;</span><br><span class="line">    processDeregisterQueue(); <span class="comment">//对于需要cancel的key进行deregister</span></span><br><span class="line">    <span class="keyword">int</span> numKeysUpdated = updateSelectedKeys();</span><br><span class="line">    <span class="keyword">if</span> (pollWrapper.interrupted()) &#123;</span><br><span class="line">        <span class="comment">// Clear the wakeup pipe</span></span><br><span class="line">        pollWrapper.putEventOps(pollWrapper.interruptedIndex(), <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">synchronized</span> (interruptLock) &#123;</span><br><span class="line">            pollWrapper.clearInterrupted();</span><br><span class="line">            IOUtil.drain(fd0);</span><br><span class="line">            interruptTriggered = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> numKeysUpdated;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">updateSelectedKeys</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> entries = pollWrapper.updated;</span><br><span class="line">    <span class="keyword">int</span> numKeysUpdated = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;entries; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> nextFD = pollWrapper.getDescriptor(i);</span><br><span class="line">        SelectionKeyImpl ski = fdToKey.get(Integer.valueOf(nextFD));</span><br><span class="line">        <span class="comment">// ski is null in the case of an interrupt</span></span><br><span class="line">        <span class="keyword">if</span> (ski != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> rOps = pollWrapper.getEventOps(i);</span><br><span class="line">            <span class="keyword">if</span> (selectedKeys.contains(ski)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (ski.channel.translateAndSetReadyOps(rOps, ski)) &#123;</span><br><span class="line">                    numKeysUpdated++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ski.channel.translateAndSetReadyOps(rOps, ski);</span><br><span class="line">                <span class="keyword">if</span> ((ski.nioReadyOps() &amp; ski.nioInterestOps()) != <span class="number">0</span>) &#123;</span><br><span class="line">                    selectedKeys.add(ski);</span><br><span class="line">                    numKeysUpdated++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> numKeysUpdated;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>processDeregisterQueue()</li>
+</ul>
+<p>有注册就有解注册，在主循环里，除了返回感兴趣的事件外，也要对不需要的key进行删除，例如channel已经关闭，则与该channel相关的key就需要删除，否则selector关注的key会越来越多，而导致性能变慢。</p>
+<ul>
+<li>updateSelectedKeys</li>
+</ul>
+<p>根据操作系统底层返回的描述符fd，利用fdToKey获取java层面的SelectionKey</p>
+<ul>
+<li>translateAndSetReadyOps</li>
+</ul>
+<p>将底层IO操作转义为java的Nio操作。由于Nio要支持多种协议，不单单只是tcp，所以要将其他IO操作转义为Java定义的4种IO操作。</p>
+<ul>
+<li>为什么需要ski.nioReadyOps() &amp; ski.nioInterestOps()进行对比</li>
+</ul>
+<p>因为write事件是一直ready的，若不和interestOps比较，会频繁触发该Key。</p>
+<h2 id="5-selector成员变量"><a href="#5-selector成员变量" class="headerlink" title="5. selector成员变量"></a>5. selector成员变量</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Set&lt;SelectionKey&gt; selectedKeys = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">protected</span> HashSet&lt;SelectionKey&gt; keys = <span class="keyword">new</span> HashSet();</span><br><span class="line"><span class="keyword">private</span> Set&lt;SelectionKey&gt; publicKeys;</span><br><span class="line"><span class="keyword">private</span> Set&lt;SelectionKey&gt; publicSelectedKeys;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="title">SelectorImpl</span><span class="params">(SelectorProvider var1)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">super</span>(var1);</span><br><span class="line">  <span class="keyword">if</span> (Util.atBugLevel(<span class="string">"1.4"</span>)) &#123;</span><br><span class="line">    <span class="keyword">this</span>.publicKeys = <span class="keyword">this</span>.keys;</span><br><span class="line">    <span class="keyword">this</span>.publicSelectedKeys = <span class="keyword">this</span>.selectedKeys;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.publicKeys = Collections.unmodifiableSet(<span class="keyword">this</span>.keys);</span><br><span class="line">    <span class="keyword">this</span>.publicSelectedKeys = Util.ungrowableSet(<span class="keyword">this</span>.selectedKeys);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>keys: 所有用户感兴趣的SelectionKey，每个channel只注册一个key到selector上，<strong>重复注册无效</strong></li>
+<li>selectedKeys: 监听到对应事件的keys而返回。<strong>selectedKeys不会做删除，当有事件触发后，则key会一直存在。所以需要手动删除。即需要selectedKeys.iterator().remove()</strong></li>
+<li>public*: 用户可访问的key，对原始的key进行不可修改或不可增长的封装</li>
+<li>selectedKeys.iterator().remove()：只是从selectedKeys列表里去除，并没有删除key本身，key本身仍然在channel里被引用，所以无需担心会重新创建而有影响。</li>
+</ul>
+<h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><p>本文只是初略的概括了Nio在java中的使用，但并未深入到在真实案例中的使用，例如nio在tomcat与netty下的具体实现，后续会继续展开描述，nio在tomcat与netty下的实战。除此以外，还有以下细节并未探索：</p>
+<ol>
+<li>LT模式 v.s. ET模式<ul>
+<li>LT模式 —— 如何利用de-register来优化selector监听</li>
+<li>ET模式时，Write事件会一直有吗？</li>
+</ul>
+</li>
+<li>de-register后，何时重新注册ops</li>
+<li>同样的端口，操作系统如何区分ServerSocket与普通socket。</li>
+<li>PollSelector初始化详细过程</li>
+<li>Buffer为什么需要flip（读写共用）</li>
+<li>如何知道connection已经断开</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2019/12/17/first-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Isaac Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Isaac's博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/17/first-blog/" class="post-title-link" itemprop="url">用Hexo建立Git Hub 博客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-17 11:33:32" itemprop="dateCreated datePublished" datetime="2019-12-17T11:33:32+08:00">2019-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-20 15:19:42" itemprop="dateModified" datetime="2019-12-20T15:19:42+08:00">2019-12-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/%E6%96%87%E5%AD%97/" itemprop="url" rel="index">
+                    <span itemprop="name">文字</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="主要链接"><a href="#主要链接" class="headerlink" title="主要链接"></a>主要链接</h2><ol>
+<li>Hexo安装 <a href="https://hexo.io/docs/setup" target="_blank" rel="noopener">https://hexo.io/docs/setup</a></li>
+<li>Hexo发布到GitHub <a href="https://hexo.io/docs/github-pages" target="_blank" rel="noopener">https://hexo.io/docs/github-pages</a></li>
+<li>Next主题安装 <a href="https://github.com/theme-next/hexo-theme-next" target="_blank" rel="noopener">https://github.com/theme-next/hexo-theme-next</a></li>
+<li>Next主题使用教程 <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">http://theme-next.iissnan.com/</a></li>
+</ol>
+<h2 id="添加插件"><a href="#添加插件" class="headerlink" title="添加插件"></a>添加插件</h2><ol>
+<li>站长工具 cnzz<br>目前v7.6.0版本安装cnzz特别简单，只需要将创建的cnzz的id写入_config.yml里cnzz_siteid即可，无需添加其他任何文件。<br>如何申请友盟，请参考<a href="https://www.jianshu.com/p/3025b0e221bf" target="_blank" rel="noopener">https://www.jianshu.com/p/3025b0e221bf</a></li>
+<li>添加mermaid画图<ul>
+<li>npm install hexo-filter-mermaid-diagrams –save</li>
+<li>修改themes/next下的_config.yml:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Mermaid tag</span><br><span class="line">mermaid:</span><br><span class="line">  enable: false</span><br><span class="line">  # Available themes: default | dark | forest | neutral</span><br><span class="line">  theme: forest</span><br><span class="line">  cdn: &#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mermaid@8&#x2F;dist&#x2F;mermaid.min.js</span><br><span class="line">  #cdn: &#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;mermaid&#x2F;8.0.0&#x2F;mermaid.min.js</span><br></pre></td></tr></table></figure>
+具体请参考 <a href="https://rogersnowing.cn/post/38b5106c.html" target="_blank" rel="noopener">https://rogersnowing.cn/post/38b5106c.html</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><ol>
+<li>当博客域名是子URL时，例如<a href="https://xxx.github.io/blog，则修改站点配置文件如下：" target="_blank" rel="noopener">https://xxx.github.io/blog，则修改站点配置文件如下：</a><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://gaocher.github.io/blog</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/blog/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"><span class="attr">pretty_urls:</span></span><br><span class="line">  <span class="attr">trailing_index:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing 'index.html' from permalinks</span></span><br><span class="line">  <span class="attr">trailing_html:</span> <span class="literal">true</span> <span class="comment"># Set to false to remove trailing '.html' from permalinks</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h2><p><a href="https://www.ezlippi.com/blog/2016/02/jekyll-to-hexo.html" target="_blank" rel="noopener">https://www.ezlippi.com/blog/2016/02/jekyll-to-hexo.html</a><br><a href="https://github.com/EZLippi/hexo-theme" target="_blank" rel="noopener">https://github.com/EZLippi/hexo-theme</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+  </div>
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Isaac Gao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Isaac Gao</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">28k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">25 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.1.1
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.6.0
+  </div>
+
+        
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1278301445&web_id=1278301445"></script>
+  </div>
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
