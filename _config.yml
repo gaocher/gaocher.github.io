@@ -106,9 +106,20 @@ deploy:
   # example, https://github.com/hexojs/hexojs.github.io
   branch: master
 
+# deploy:
+#   type: leancloud_counter_security_sync
+
 
 symbols_count_time:
   symbols: true # 文章字数
   time: true # 阅读时长
   total_symbols: true # 所有文章总字数
   total_time: true # 所有文章阅读中时长
+
+leancloud_counter_security:
+  enable_sync: true
+  app_id: N1bPkxX4CVD9fq3Qrjf27qJR-gzGzoHsz
+  app_key: OxTUzGGEUBN2mWDFTOnRUL4p
+  server_url: https://leancloud.cn  # Required for apps from CN region, e.g. https://leancloud.cn
+  username: gaocher
+  password: gch007
