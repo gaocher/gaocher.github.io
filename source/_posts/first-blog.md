@@ -15,6 +15,7 @@ categories:
 5. 添加sitemap供搜索引擎搜索 https://eericzeng.github.io/2019/07/14/hexo%E5%8D%9A%E5%AE%A2%E7%AB%99%E7%82%B9sitemap%E7%9A%84%E4%BD%BF%E7%94%A8/
 6. 添加版权信息  http://blog.amdoing.com/the-post-copyright-in-hexo-next/
 7. 添加评论 https://yashuning.github.io/2018/06/29/hexo-Next-%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/
+8. 添加阅读次数 https://www.zyjdn.com/2020/02/05/Hexo-NexT%20%E4%BD%BF%E7%94%A8%20leancloud%20%E9%98%85%E8%AF%BB%E6%AC%A1%E6%95%B0/
 
 ## 添加插件
 1. 站长工具 cnzz
