@@ -14,6 +14,7 @@ categories:
 4. Next主题使用教程 http://theme-next.iissnan.com/
 5. 添加sitemap供搜索引擎搜索 https://eericzeng.github.io/2019/07/14/hexo%E5%8D%9A%E5%AE%A2%E7%AB%99%E7%82%B9sitemap%E7%9A%84%E4%BD%BF%E7%94%A8/
 6. 添加版权信息  http://blog.amdoing.com/the-post-copyright-in-hexo-next/
+7. 添加评论 https://yashuning.github.io/2018/06/29/hexo-Next-%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E5%8A%9F%E8%83%BD/
 
 ## 添加插件
 1. 站长工具 cnzz
