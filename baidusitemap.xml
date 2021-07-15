@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://gaocher.github.io/2019/12/29/bytecode-instrumentation/</loc>
+    <loc>https://gaocher.github.io/2021/07/15/bytecode-instrumentation/</loc>
+    <lastmod>2021-07-15</lastmod>
+  </url>  <url>
+    <loc>https://gaocher.github.io/2020/01/05/mono-create/</loc>
     <lastmod>2021-07-15</lastmod>
   </url>  <url>
     <loc>https://gaocher.github.io/2020/03/29/memory-part-1-memory-types/</loc>
-    <lastmod>2020-03-29</lastmod>
+    <lastmod>2021-07-15</lastmod>
   </url>  <url>
     <loc>https://gaocher.github.io/2019/12/17/first-blog/</loc>
-    <lastmod>2020-03-27</lastmod>
-  </url>  <url>
-    <loc>https://gaocher.github.io/2020/01/05/mono-create/</loc>
-    <lastmod>2020-01-06</lastmod>
-  </url>  <url>
-    <loc>https://gaocher.github.io/2019/12/29/dig-and-dns-record-type/</loc>
-    <lastmod>2019-12-29</lastmod>
+    <lastmod>2021-07-15</lastmod>
   </url>  <url>
     <loc>https://gaocher.github.io/2019/12/29/dns-data-type-md/</loc>
-    <lastmod>2019-12-29</lastmod>
+    <lastmod>2021-07-15</lastmod>
+  </url>  <url>
+    <loc>https://gaocher.github.io/2019/12/29/dig-and-dns-record-type/</loc>
+    <lastmod>2021-07-15</lastmod>
   </url>  <url>
     <loc>https://gaocher.github.io/2019/12/20/Java_Nio/</loc>
-    <lastmod>2019-12-29</lastmod>
+    <lastmod>2021-07-15</lastmod>
   </url>
 </urlset>

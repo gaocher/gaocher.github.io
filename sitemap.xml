@@ -2,63 +2,63 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://gaocher.github.io/2019/12/29/bytecode-instrumentation/</loc>
+    <loc>https://gaocher.github.io/2021/07/15/bytecode-instrumentation/</loc>
     
-    <lastmod>2021-07-15T06:46:30.566Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gaocher.github.io/2020/03/29/memory-part-1-memory-types/</loc>
-    
-    <lastmod>2020-03-29T03:55:26.490Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://gaocher.github.io/2019/12/17/first-blog/</loc>
-    
-    <lastmod>2020-03-27T06:41:33.176Z</lastmod>
+    <lastmod>2021-07-15T09:38:40.862Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://gaocher.github.io/2020/01/05/mono-create/</loc>
     
-    <lastmod>2020-01-06T09:24:20.248Z</lastmod>
+    <lastmod>2021-07-15T09:37:31.203Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://gaocher.github.io/2019/12/29/dig-and-dns-record-type/</loc>
+    <loc>https://gaocher.github.io/2020/03/29/memory-part-1-memory-types/</loc>
     
-    <lastmod>2019-12-29T16:13:16.549Z</lastmod>
+    <lastmod>2021-07-15T09:37:31.201Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gaocher.github.io/2019/12/17/first-blog/</loc>
+    
+    <lastmod>2021-07-15T09:37:31.199Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://gaocher.github.io/2019/12/29/dns-data-type-md/</loc>
     
-    <lastmod>2019-12-29T16:12:59.271Z</lastmod>
+    <lastmod>2021-07-15T09:37:31.193Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://gaocher.github.io/2019/12/29/dig-and-dns-record-type/</loc>
+    
+    <lastmod>2021-07-15T09:37:31.186Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://gaocher.github.io/2019/12/20/Java_Nio/</loc>
     
-    <lastmod>2019-12-29T15:25:39.512Z</lastmod>
+    <lastmod>2021-07-15T09:37:31.179Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://gaocher.github.io/categories/index.html</loc>
+    <loc>https://gaocher.github.io/tags/index.html</loc>
     
     <lastmod>2019-12-18T02:40:05.323Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://gaocher.github.io/tags/index.html</loc>
+    <loc>https://gaocher.github.io/categories/index.html</loc>
     
     <lastmod>2019-12-18T02:40:05.323Z</lastmod>
     

@@ -52,21 +52,21 @@
   <meta name="description" content="字节码增强技术，作为Java程序员来说，是个既熟悉又陌生的词，熟悉的是几乎我们无时无刻不再使用着字节码增强技术，陌生则是因为对于开发人员尤其是业务开发来说，实在是没有机会或需求要用到字节码增强相关的技术手段。为此，本文通过简单的介绍来揭开字节码增强技术的神秘面纱，简化起见，本文不对相关技术工具进行深入的介绍，只做综述性质的介绍，旨在让读者有个宏观的认识从而减少初入门时查多方资料的辛苦。 (名词解释">
 <meta property="og:type" content="article">
 <meta property="og:title" content="字节码增强技术介绍">
-<meta property="og:url" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2019&#x2F;12&#x2F;29&#x2F;bytecode-instrumentation&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2021&#x2F;07&#x2F;15&#x2F;bytecode-instrumentation&#x2F;index.html">
 <meta property="og:site_name" content="Isaac&#39;s博客">
 <meta property="og:description" content="字节码增强技术，作为Java程序员来说，是个既熟悉又陌生的词，熟悉的是几乎我们无时无刻不再使用着字节码增强技术，陌生则是因为对于开发人员尤其是业务开发来说，实在是没有机会或需求要用到字节码增强相关的技术手段。为此，本文通过简单的介绍来揭开字节码增强技术的神秘面纱，简化起见，本文不对相关技术工具进行深入的介绍，只做综述性质的介绍，旨在让读者有个宏观的认识从而减少初入门时查多方资料的辛苦。 (名词解释">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2019&#x2F;12&#x2F;29&#x2F;bytecode-instrumentation&#x2F;bytecode-instrumentation-category.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2021&#x2F;07&#x2F;15&#x2F;bytecode-instrumentation&#x2F;bytecode-instrumentation-category.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;images&#x2F;byte_code_lifecycle.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;images&#x2F;Bytecode-instrumentation-timing.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;images&#x2F;lombok-APT.png">
-<meta property="article:published_time" content="2019-12-29T15:09:02.000Z">
-<meta property="article:modified_time" content="2021-07-15T06:46:30.566Z">
+<meta property="article:published_time" content="2021-07-15T05:09:02.000Z">
+<meta property="article:modified_time" content="2021-07-15T09:38:40.862Z">
 <meta property="article:author" content="Isaac Gao">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2019&#x2F;12&#x2F;29&#x2F;bytecode-instrumentation&#x2F;bytecode-instrumentation-category.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gaocher.github.io&#x2F;2021&#x2F;07&#x2F;15&#x2F;bytecode-instrumentation&#x2F;bytecode-instrumentation-category.jpg">
 
-<link rel="canonical" href="https://gaocher.github.io/2019/12/29/bytecode-instrumentation/">
+<link rel="canonical" href="https://gaocher.github.io/2021/07/15/bytecode-instrumentation/">
 
 
 <script id="page-configurations">
@@ -223,7 +223,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2019/12/29/bytecode-instrumentation/">
+    <link itemprop="mainEntityOfPage" href="https://gaocher.github.io/2021/07/15/bytecode-instrumentation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -245,16 +245,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2019-12-29 23:09:02" itemprop="dateCreated datePublished" datetime="2019-12-29T23:09:02+08:00">2019-12-29</time>
+              <time title="创建时间：2021-07-15 13:09:02 / 修改时间：17:38:40" itemprop="dateCreated datePublished" datetime="2021-07-15T13:09:02+08:00">2021-07-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-15 14:46:30" itemprop="dateModified" datetime="2021-07-15T14:46:30+08:00">2021-07-15</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -268,7 +262,7 @@
             </span>
 
           
-            <span id="/2019/12/29/bytecode-instrumentation/" class="post-meta-item leancloud_visitors" data-flag-title="字节码增强技术介绍" title="阅读次数">
+            <span id="/2021/07/15/bytecode-instrumentation/" class="post-meta-item leancloud_visitors" data-flag-title="字节码增强技术介绍" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -283,8 +277,8 @@
       </span>
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/12/29/bytecode-instrumentation/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/12/29/bytecode-instrumentation/" itemprop="commentCount"></span>
+    <a title="valine" href="/2021/07/15/bytecode-instrumentation/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/07/15/bytecode-instrumentation/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -368,7 +362,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://gaocher.github.io/2019/12/29/bytecode-instrumentation/" title="字节码增强技术介绍">https://gaocher.github.io/2019/12/29/bytecode-instrumentation/</a>
+    <a href="https://gaocher.github.io/2021/07/15/bytecode-instrumentation/" title="字节码增强技术介绍">https://gaocher.github.io/2021/07/15/bytecode-instrumentation/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -385,13 +379,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/29/dig-and-dns-record-type/" rel="prev" title="dig与记录类型举例">
-      <i class="fa fa-chevron-left"></i> dig与记录类型举例
+    <a href="/2020/03/29/memory-part-1-memory-types/" rel="prev" title="Part1 - 内存类型">
+      <i class="fa fa-chevron-left"></i> Part1 - 内存类型
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/01/05/mono-create/" rel="next" title="Mono/FluxCreate —— 传统代码转为Reactive的桥梁">
-      Mono/FluxCreate —— 传统代码转为Reactive的桥梁 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
