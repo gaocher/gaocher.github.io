@@ -239,7 +239,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-07-15 13:09:02 / 修改时间：17:38:40" itemprop="dateCreated datePublished" datetime="2021-07-15T13:09:02+08:00">2021-07-15</time>
+              <time title="创建时间：2021-07-15 13:09:02 / 修改时间：17:46:28" itemprop="dateCreated datePublished" datetime="2021-07-15T13:09:02+08:00">2021-07-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,10 +301,10 @@
       
           <p>字节码增强技术，作为Java程序员来说，是个既熟悉又陌生的词，熟悉的是几乎我们无时无刻不再使用着字节码增强技术，陌生则是因为对于开发人员尤其是业务开发来说，实在是没有机会或需求要用到字节码增强相关的技术手段。为此，本文通过简单的介绍来揭开字节码增强技术的神秘面纱，简化起见，本文不对相关技术工具进行深入的介绍，只做综述性质的介绍，旨在让读者有个宏观的认识从而减少初入门时查多方资料的辛苦。</p>
 <p>(名词解释： 字节码增强，英文是Bytecode Instrumentation, 那如何理解单词Instrumentation？（本人对这个单词迷惑了很久后，终于有了自己的理解:)） 从词根instrument看，instrument名词形态是<code>工具、器械</code>，动词形态是<code>给什么装上器械</code>,那么instrumentation可以理解为instrument动词形态的名词形式，也就是<code>装上器械、工具</code>，可以理解为要起飞了，所以中文翻译成<code>增强</code>还是很贴切的。）</p>
-<h1 id="技术分类"><a href="#技术分类" class="headerlink" title="技术分类"></a>技术分类</h1><p>前面也提到了，我们在开发过程中，无时无刻的使用着字节码增强技术，例如简化代码的Lombok，最常用的AOP技术以及各类框架类工具，如代码覆盖率Jacoco、链路追踪的Skywalking、性能分析工具Arthas等等。<br><img src="bytecode-instrumentation-category.jpg" alt="整体分类图"></p>
+<h1 id="技术分类"><a href="#技术分类" class="headerlink" title="技术分类"></a>技术分类</h1><p>前面也提到了，我们在开发过程中，无时无刻的使用着字节码增强技术，例如简化代码的Lombok，最常用的AOP技术以及各类框架类工具，如代码覆盖率Jacoco、链路追踪的Skywalking、性能分析工具Arthas等等。<br><img src="/images/bytecode-instrumentation-category.jpg" alt="整体分类图"></p>
 <p>虽然这些工具都统称用到了字节码增强技术，然而其实用到的技术都各有差异，为此我们对不同工具的用途与使用时机进行一次全面的梳理。</p>
 <p>从狭义来讲，字节码增强讲的就是对已经是字节码的class文件进行操作，那么主要有两种工具，一个是ASM，另一个是Javassit，ASM是纯粹的对字节码按照java的规范就行字节码理解范畴内的进行修改操作，可以说门槛很高; Javassit则可以理解为是一个提供了对字节码操作API的框架，来简化字节码操作的门槛，让字节码操作像面向对象编程一样简单；因此，由想而知，ASM要比Javassit性能要好，为此，为了鱼和熊掌兼得，我们从ASM基础上又衍生出了CGLib，虽然功能没有ASM强悍，但使用相对简单了很多。</p>
-<p>那么从广义上来讲，所有让代码具备原本不具有的功能，那种类似<code>魔法</code>效果的技术，都统称为字节码增强。<br><img src="/images/byte_code_lifecycle.png" alt="字节码生命周期"></p>
+<p>那么从广义上来讲，所有让代码具备原本不具有的功能，那种类似<code>魔法</code>效果的技术，都统称为字节码增强。<br><img src="/images/byte_code_life_cycle.png" alt="字节码生命周期"></p>
 <p>从字节码生命周期看，除了字节码class文件外，还包括从源代码生成字节码的过程，以及字节码进入运行时后classloader加载前，以及加载后的运行。</p>
 <p>正如AOP技术可以分为静态织入和动态织入（参见<a href="https://juejin.cn/post/6844903774134206477" target="_blank" rel="noopener">会用就行了？你知道 AOP 框架的原理吗？</a>），字节码也可以分为编译前、编译后、加载前、加载后几个阶段。<br><img src="/images/Bytecode-instrumentation-timing.jpg" alt="字节码使用阶段"></p>
 <h2 id="类加载器限制"><a href="#类加载器限制" class="headerlink" title="类加载器限制"></a>类加载器限制</h2><p>正如前面介绍的字节码操作工具，ASM、Javassit等可以对class进行操作修改，那是不是可以对一个已经加载的类进行修改并重载呢？ 答案是不能。因为Classloader在加载类的时候会进行校验，对于已经加载过的类是不允许重复加载的。那如果字节码增强技术只能用在加载之前的范围，那可以使用的范围就特别有限了，好在Java提供了Instrument技术，也称agent技术，让这些字节码工具能够在类加载后也能进行修改，给字节码技术带来了广阔的使用范围和应用空间。</p>
